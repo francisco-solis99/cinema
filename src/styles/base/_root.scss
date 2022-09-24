@@ -1,5 +1,27 @@
-:root {}
+:root {
+  --color-primary: #0D1735;
+  --color-secundary: #FFB608;
+  --color-tertiry: #9ad3d6;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-white-gray: #DADADA;
+  --color-white-blue: #f2fcff;
+  --font-family-text: 'Dosis', sans-serif;
+  --font-family-logo: 'Nabla', cursive;
+  --font-weight-title: 800;
+  --font-weight-subtitle: 700;
+  --font-weight-text1: 500;
+  --font-weight-text2: 400;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Dosis', sans-serif;
+  font-family: var(--font-family-text);
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
