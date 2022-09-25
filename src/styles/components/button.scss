@@ -1,0 +1,23 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button-icon {
+  background: transparent;
+  border: 0;
+}
+
+.button__primary {
+  padding: .25em .75em;
+  border-radius: 0.45em;
+  background-color: var(--color-secundary);
+  transition: all ease-in 250ms;
+}
+
+.button__primary:hover,
+.button__primary:active {
+  opacity: 0.85;
+}

@@ -8,10 +8,80 @@
   </head>
   <body>
     <header class="header">
-      <h1 class="title">Cinema</h1>
+      <div class="overlay"></div>
+      <div class="container">
+        <nav class="navbar row">
+          <h1 class="title">Cinema</h1>
+          <button class="button button-icon">
+            <span class="icon">
+              <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.9279 22.4559L16.1369 14.665C17.3459 13.102 17.9999 11.191 17.9999 9.18099C17.9999 6.775 17.0609 4.51901 15.3629 2.81802C13.6649 1.11703 11.403 0.18103 8.99996 0.18103C6.59697 0.18103 4.33498 1.12003 2.63699 2.81802C0.935996 4.51601 0 6.775 0 9.18099C0 11.584 0.938996 13.846 2.63699 15.544C4.33498 17.245 6.59397 18.181 8.99996 18.181C11.01 18.181 12.9179 17.527 14.4809 16.321L22.2719 24.1089C22.2947 24.1318 22.3219 24.1499 22.3517 24.1623C22.3816 24.1747 22.4136 24.181 22.4459 24.181C22.4782 24.181 22.5102 24.1747 22.5401 24.1623C22.5699 24.1499 22.5971 24.1318 22.6199 24.1089L23.9279 22.8039C23.9508 22.7811 23.9689 22.754 23.9813 22.7241C23.9936 22.6943 24 22.6622 24 22.6299C24 22.5976 23.9936 22.5656 23.9813 22.5358C23.9689 22.5059 23.9508 22.4788 23.9279 22.4559ZM13.7519 13.933C12.4799 15.202 10.794 15.901 8.99996 15.901C7.20597 15.901 5.51998 15.202 4.24798 13.933C2.97899 12.661 2.27999 10.975 2.27999 9.18099C2.27999 7.387 2.97899 5.69801 4.24798 4.42901C5.51998 3.16002 7.20597 2.46102 8.99996 2.46102C10.794 2.46102 12.4829 3.15702 13.7519 4.42901C15.0209 5.70101 15.7199 7.387 15.7199 9.18099C15.7199 10.975 15.0209 12.664 13.7519 13.933Z" fill="white"/>
+              </svg>
+            </span>
+          </button>
+        </nav>
+        <h2 class="best__movie-title">Thor Love And Thunder</h2>
+      </div>
     </header>
-    <main></main>
-    <footer></footer>
+
+    <main class="hero">
+      <section class="section section__tendencies" id="tendencies">
+        <div class="container">
+          <div class="section__info row">
+            <h2 class="section__title">Tendencies</h2>
+            <button class="button button__primary">see more</button>
+          </div>
+          <div class="movies__cards">
+            <article>
+              <img src="" alt="">
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section__latest" id="latest">
+        <div class="container">
+          <div class="section__info row">
+            <h2 class="section__title">Latest</h2>
+            <button class="button button__primary">see more</button>
+          </div>
+          <div class="movies__cards">
+            <article>
+              <img src="" alt="">
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section__uncoming" id="uncoming">
+        <div class="container">
+          <div class="section__info row">
+            <h2 class="section__title">Uncoming</h2>
+            <button class="button button__primary">see more</button>
+          </div>
+          <div class="movies__cards">
+            <article>
+              <img src="" alt="">
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">Made by <a href="https://github.com/francisco-solis99">Francisco</a> with 💛</p>
+    </footer>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
+
+
+<!--
+  Render the best movie pf the week
+  Render the tendencies movies
+  Render the last movies
+  Render the uncoming movies
+  Render the categories
+  Render the popular people
+  Render each movie details
+  Render the categories lists
+ -->
