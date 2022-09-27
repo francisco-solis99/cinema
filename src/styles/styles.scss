@@ -11,7 +11,7 @@ a {
   min-height: 70vh;
   padding-block-start: 1.25em;
   background: var(--color-tertiry);
-  background-image: linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg');
+  // background-image: linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -25,7 +25,7 @@ a {
   position: absolute;
   bottom: 15%;
   width: 80%;
-  font-size: 3.25rem;
+  font-size: 2.75rem;
   line-height: 4.25rem;
   background: linear-gradient(to right,
       rgb(243, 243, 243),
