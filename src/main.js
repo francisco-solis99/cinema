@@ -23,9 +23,9 @@ async function renderBestTrendingMovie() {
   header.querySelector('.best__movie-title').textContent = bestTrendingMovie.title;
 }
 
-async function renderTendencies() {
-  const section = document.querySelector('.section__tendencies .movies__cards');
-  const tendenciesMovies = await getTrendingMovies();
+async function renderMovies({ htmlSelectorSection, callbackGetMovies }) {
+  const section = document.querySelector(htmlSelectorSection);
+  const tendenciesMovies = await callbackGetMovies();
   const fragment = document.createDocumentFragment();
 
   tendenciesMovies.forEach(movie => {
@@ -51,4 +51,4 @@ function createMovieCard(movie) {
 }
 
 renderBestTrendingMovie();
-renderTendencies();
+renderMovies({ htmlSelectorSection: '.section__tendencies .movies__cards', callbackGetMovies: getTrendingMovies });

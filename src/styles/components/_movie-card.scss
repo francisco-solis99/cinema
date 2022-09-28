@@ -1,0 +1,21 @@
+.movies__cards {
+  margin-block-start: 1.25em;
+  position: relative;
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow: auto;
+
+
+  & .movie__card {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+
+    & .card__poster {
+      object-fit: cover;
+    }
+  }
+
+  & .movie__card+.movie__card {
+    margin-left: 1.25em;
+  }
+}
