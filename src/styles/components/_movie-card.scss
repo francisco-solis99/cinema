@@ -9,9 +9,28 @@
   & .movie__card {
     flex-shrink: 0;
     scroll-snap-align: center;
+    cursor: pointer;
+    padding: 1em;
+    background-color: #fff;
+    // filter: grayscale(100%);
+    // transition: filter 300ms;
+
+    // &:is(:hover, :focus) {
+    //   filter: grayscale(0%);
+    // }
+
+    & .card__poster-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
 
     & .card__poster {
       object-fit: cover;
+      transition: transform 200ms;
+
+      &:is(:active, :hover) {
+        transform: scale(1.05);
+      }
     }
   }
 
