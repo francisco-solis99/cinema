@@ -1,17 +1,13 @@
+@use "cards";
+
 .movies__cards {
-  margin-block-start: 1.25em;
-  position: relative;
-  display: flex;
-  scroll-snap-type: x mandatory;
-  overflow: auto;
+  @include cards.card__container;
 
 
   & .movie__card {
-    flex-shrink: 0;
-    scroll-snap-align: center;
-    cursor: pointer;
-    padding: 1em;
-    background-color: #fff;
+    @include cards.card__item;
+    // padding: 1em;
+    // background-color: #fff;
     // filter: grayscale(100%);
     // transition: filter 300ms;
 
@@ -22,6 +18,9 @@
     & .card__poster-wrapper {
       overflow: hidden;
       position: relative;
+      padding: 1em;
+      padding-bottom: 0;
+      background-color: #fff;
     }
 
     & .card__poster {
@@ -32,9 +31,19 @@
         transform: scale(1.05);
       }
     }
+
+    & .card__caption {
+      margin-block-start: 1em;
+      margin-block-end: 0.25em;
+      color: #000;
+
+      & span+span {
+        margin-inline-start: 0.25em;
+      }
+    }
   }
 
   & .movie__card+.movie__card {
-    margin-left: 1.25em;
+    margin-inline-start: 1.25em;
   }
 }

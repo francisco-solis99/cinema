@@ -1,0 +1,13 @@
+@mixin card__container {
+  margin-block-start: 1.25em;
+  position: relative;
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow: auto;
+}
+
+@mixin card__item {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  cursor: pointer;
+}
