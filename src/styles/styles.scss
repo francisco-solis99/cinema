@@ -41,3 +41,37 @@ a {
 .section {
   margin-block-end: 4em;
 }
+
+.categories__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1em;
+  margin-block-start: 1em;
+  // background-color: red;
+}
+
+.category__item {
+  will-change: opacity;
+  transition: opacity 200ms ease-in;
+
+  & .category__square {
+    display: inline-block;
+    width: 1.75em;
+    height: 1.75em;
+    border-radius: 5px;
+    margin-inline-end: 0.5em;
+    background-color: yellow;
+  }
+
+  & .category__name {
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover,
+  &:active {
+    opacity: 0.7;
+  }
+}

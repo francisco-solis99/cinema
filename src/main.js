@@ -9,9 +9,9 @@ function getDataInJson(url) {
 }
 
 async function getListResults(urlName) {
-  const url = getUrl(urlName);
-  const { results } = await getDataInJson(url);
-  return results;
+  const { url, prop } = getUrl(urlName);
+  const response = await getDataInJson(url);
+  return response[prop];
 }
 
 // Render the most tendencie movie
@@ -22,19 +22,21 @@ async function renderBestTrendingMovie() {
   header.querySelector('.best__movie-title').textContent = bestTrendingMovie.title;
 }
 
-async function renderListResults({ htmlSelectorSection, urlName, callbackRender }) {
+// Render the list results
+async function renderListResults({ htmlSelectorSection, urlName, callbackRender, numItems }) {
   const section = document.querySelector(htmlSelectorSection);
-  const movies = await getListResults(urlName);
+  const list = await getListResults(urlName);
   const fragment = document.createDocumentFragment();
 
-  movies.forEach(movie => {
-    const movieCard = callbackRender(movie);
-    fragment.append(movieCard);
+  list.slice(0, numItems ?? list.lenght).forEach(item => {
+    const element = callbackRender(item);
+    fragment.append(element);
   });
 
   section.appendChild(fragment);
 }
 
+// Create a movie card with some of teh movie information
 function createMovieCard(movie) {
   const { poster_path: posterPath, title: movieName, release_date: date, vote_average: score, id } = movie;
   const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${posterPath}`;
@@ -60,6 +62,7 @@ function createMovieCard(movie) {
   return card;
 }
 
+// Create person card
 function createPersonCard(person) {
   const { name, profile_path: profilePath } = person;
   const personCard = document.createElement('arcticle');
@@ -81,15 +84,48 @@ function createPersonCard(person) {
   return personCard;
 }
 
+function createGenres(genre) {
+  const { name, id } = genre;
+  const nameCssVariable = name.toLowerCase().replace(' ', '-');
+  const colorCategory = getComputedStyle(document.body).getPropertyValue(`--color-genre-${nameCssVariable}`);
+  const categoryElement = document.createElement('div');
+  categoryElement.classList.add('category__item', `category__item-${id}}`);
+  categoryElement.innerHTML = `
+    <a href="/" class="category__name">
+      <span class="category__square" style="background-color:${colorCategory}"></span>
+      <span>${name}</span>
+    </a>
+  `;
+  return categoryElement;
+}
+
+// Get the API url
 function getUrl(label) {
   const urlsApi = {
-    trendingMovies: `${API.base}${API.trending}/movie/week?api_key=${API.key}`,
-    upcomingMovies: `${API.base}/movie/upcoming?api_key=${API.key}`,
-    nowPlayingMovies: `${API.base}/movie/now_playing?api_key=${API.key}`,
-    trendingPeople: `${API.base}/person/popular?api_key=${API.key}`
+    trendingMovies: {
+      url: `${API.base}${API.trending}/movie/week?api_key=${API.key}`,
+      prop: 'results'
+    },
+    upcomingMovies: {
+      url: `${API.base}/movie/upcoming?api_key=${API.key}`,
+      prop: 'results'
+    },
+
+    nowPlayingMovies: {
+      url: `${API.base}/movie/now_playing?api_key=${API.key}`,
+      prop: 'results'
+    },
+    trendingPeople: {
+      url: `${API.base}/person/popular?api_key=${API.key}`,
+      prop: 'results'
+    },
+    categoriesMovies: {
+      url: `${API.base}/genre/movie/list?api_key=${API.key}`,
+      prop: 'genres'
+    }
   };
   return urlsApi[label];
-}
+};
 
 // Render init functions
 renderBestTrendingMovie();
@@ -118,3 +154,13 @@ renderListResults({
   callbackRender: createPersonCard,
   urlName: 'trendingPeople'
 });
+
+// Render the categories
+renderListResults({
+  htmlSelectorSection: '.section__categories .categories__items',
+  callbackRender: createGenres,
+  urlName: 'categoriesMovies',
+  numItems: 15
+});
+
+// console.log(getComputedStyle(document.body).getPropertyValue('--color-primary'));
