@@ -1,10 +1,9 @@
 import './styles/styles.scss';
-import { API } from './js/key.js';
+import { API } from './js/api.js';
 
 function getDataInJson(url) {
-  console.log(url);
-  return fetch(url)
-    .then(response => response.json())
+  return API.get(url)
+    .then(({ data }) => data)
     .catch(err => console.log(err));
 }
 
@@ -103,24 +102,24 @@ function createGenres(genre) {
 function getUrl(label) {
   const urlsApi = {
     trendingMovies: {
-      url: `${API.base}${API.trending}/movie/week?api_key=${API.key}`,
+      url: '/trending/movie/week',
       prop: 'results'
     },
     upcomingMovies: {
-      url: `${API.base}/movie/upcoming?api_key=${API.key}`,
+      url: '/movie/upcoming',
       prop: 'results'
     },
 
     nowPlayingMovies: {
-      url: `${API.base}/movie/now_playing?api_key=${API.key}`,
+      url: '/movie/now_playing',
       prop: 'results'
     },
     trendingPeople: {
-      url: `${API.base}/person/popular?api_key=${API.key}`,
+      url: '/person/popular',
       prop: 'results'
     },
     categoriesMovies: {
-      url: `${API.base}/genre/movie/list?api_key=${API.key}`,
+      url: '/genre/movie/list',
       prop: 'genres'
     }
   };
@@ -164,3 +163,16 @@ renderListResults({
 });
 
 // console.log(getComputedStyle(document.body).getPropertyValue('--color-primary'));
+
+// Axios test
+
+// async function textAxios() {
+//   try {
+//     const { data } = await instance.get('/trending/movie/week');
+//     console.log(data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// textAxios();
