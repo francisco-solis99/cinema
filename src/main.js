@@ -161,18 +161,3 @@ renderListResults({
   urlName: 'categoriesMovies',
   numItems: 15
 });
-
-// console.log(getComputedStyle(document.body).getPropertyValue('--color-primary'));
-
-// Axios test
-
-// async function textAxios() {
-//   try {
-//     const { data } = await instance.get('/trending/movie/week');
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// textAxios();
