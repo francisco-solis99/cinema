@@ -2,48 +2,50 @@
 
 .movies__cards {
   @include cards.card__container;
+}
 
+.movie__card {
+  @include cards.card__item;
+  // padding: 1em;
+  // background-color: #fff;
+  // filter: grayscale(100%);
+  // transition: filter 300ms;
 
-  & .movie__card {
-    @include cards.card__item;
-    // padding: 1em;
-    // background-color: #fff;
-    // filter: grayscale(100%);
-    // transition: filter 300ms;
+  // &:is(:hover, :focus) {
+  //   filter: grayscale(0%);
+  // }
 
-    // &:is(:hover, :focus) {
-    //   filter: grayscale(0%);
-    // }
+  & .card__poster-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding: 1em;
+    padding-bottom: 0;
+    background-color: #fff;
+  }
 
-    & .card__poster-wrapper {
-      overflow: hidden;
-      position: relative;
-      padding: 1em;
-      padding-bottom: 0;
-      background-color: #fff;
-    }
+  & .card__poster {
+    object-fit: cover;
+    transition: transform 200ms;
+    opacity: 1;
+    min-width: 200px;
+    min-height: 350px;
 
-    & .card__poster {
-      object-fit: cover;
-      transition: transform 200ms;
-
-      &:is(:active, :hover) {
-        transform: scale(1.05);
-      }
-    }
-
-    & .card__caption {
-      margin-block-start: 1em;
-      margin-block-end: 0.25em;
-      color: #000;
-
-      & span+span {
-        margin-inline-start: 0.25em;
-      }
+    &:is(:active, :hover) {
+      transform: scale(1.05);
     }
   }
 
-  & .movie__card+.movie__card {
-    margin-inline-start: 1.25em;
+  & .card__caption {
+    margin-block-start: 1em;
+    margin-block-end: 0.25em;
+    color: #000;
+
+    & span+span {
+      margin-inline-start: 0.25em;
+    }
   }
+}
+
+.movie__card+.movie__card {
+  margin-inline-start: 1.25em;
 }

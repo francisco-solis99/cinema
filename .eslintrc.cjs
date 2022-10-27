@@ -12,6 +12,14 @@ module.exports = {
   },
   rules: {
     semi: ['error', 'always'],
-    'space-before-function-paren': ['error', 'never']
+    'space-before-function-paren': ['error', 'never'],
+    // 'no-console': 'warn',
+    'no-debugger': 'warn',
+    'no-plusplus': [
+      'error',
+      {
+        allowForLoopAfterthoughts: true
+      }
+    ]
   }
 };

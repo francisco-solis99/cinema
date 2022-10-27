@@ -1,0 +1,17 @@
+.views__movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-items: center;
+  gap: 1em;
+}
+
+.movie__card {
+  max-width: 350px;
+  & figure {
+    height: 100%;
+  }
+}
+
+.movie__card + .movie__card {
+  margin: 0
+}
