@@ -1,3 +1,11 @@
+.header__movies-list {
+  margin: 1em 0;
+}
+
+.movies__list-subtitle {
+  margin-block-start: 1em;
+}
+
 .views__movies {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
