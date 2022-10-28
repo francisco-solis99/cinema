@@ -4,9 +4,9 @@ import {
   createMovieCard,
   createPersonCard,
   createGenres
-} from '../js/utils.js';
+} from '../js/dom.js';
 
-export default function(initialContent) {
+export default function() {
   // Render init functions
   renderBestTrendingMovie();
   // render the trending movies
@@ -49,6 +49,7 @@ export default function(initialContent) {
   });
 
   const buttonsHome = document.querySelectorAll('.button__primary');
+  console.log(buttonsHome);
 
   buttonsHome.forEach(btn => {
     const hash = btn.dataset.btnmore;

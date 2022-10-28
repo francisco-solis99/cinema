@@ -1,16 +1,13 @@
-import { $, createMovieCard, renderListResults } from '../js/utils.js';
+import { createMovieCard, renderListResults } from '../js/dom.js';
+import { render } from '../js/utils.js';
 
 export default async function() {
-  const htmlTemplate = $(document, '#upcoming__view');
-  const html = htmlTemplate.content.cloneNode(true);
-  document.body.replaceChildren();
-  document.body.appendChild(html);
-
-  renderListResults({
-    htmlSelectorSection: '.upcoming__movies',
-    callbackRender: createMovieCard,
-    urlName: 'upcomingMovies'
+  render('#upcoming__view', () => {
+    renderListResults({
+      htmlSelectorSection: '.upcoming__movies',
+      callbackRender: createMovieCard,
+      urlName: 'upcomingMovies'
+    });
   });
-
-  await import('../styles/pages/trendings.scss');
+  await import('../styles/pages/movies-list.scss');
 }
