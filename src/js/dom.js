@@ -1,4 +1,4 @@
-import { getListResults } from './utils.js';
+import { getListResults, loadDefaultImagePerson } from './utils.js';
 
 // Render the most tendencie movie
 export async function renderBestTrendingMovie() {
@@ -25,7 +25,7 @@ export async function renderListResults({ htmlSelectorSection, urlName, callback
 // Create a movie card with some of teh movie information
 export function createMovieCard(movie) {
   const { poster_path: posterPath, title: movieName, release_date: date, vote_average: score, id } = movie;
-  const posterUrl = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${posterPath}`;
+  const posterUrl = `https://www.themoviedb.org/t/p/w300/${posterPath}`;
   const card = document.createElement('arcticle');
   card.dataset.movieId = id;
   card.classList.add('movie__card');
@@ -51,13 +51,13 @@ export function createMovieCard(movie) {
 // Create person card
 export function createPersonCard(person) {
   const { name, profile_path: profilePath } = person;
-  const personCard = document.createElement('arcticle');
+  const personCard = document.createElement('article');
   // card.dataset.movieId = id;
   personCard.classList.add('person__card');
   personCard.innerHTML = `
-    <figure class="card__person-wrapper">
-      <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${profilePath}" alt="Actor Photo - ${name}" class="card__person-img">
-    </figure>
+    <picture class="card__person-wrapper">
+      <img src="https://www.themoviedb.org/t/p/w300/${profilePath}" alt="Actor Photo - ${name}" class="card__person-img">
+    </picture>
     <div class="overlay">
       <h4 class="card__person-name">${name}</h4>
       <div class="bubble"></div>
@@ -67,6 +67,13 @@ export function createPersonCard(person) {
       <div class="bubble"></div>
     </div>
   `;
+
+  // Check the image and load the dafault it is a error in load
+  const personImg = personCard.querySelector('img');
+  personImg.addEventListener('error', (e) => {
+    personCard.classList.add('unload');
+    loadDefaultImagePerson(e);
+  });
   return personCard;
 }
 
