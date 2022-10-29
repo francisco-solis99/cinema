@@ -1,0 +1,33 @@
+@forward 'views';
+
+.people__actors {
+  & .person__card {
+
+    & .overlay {
+      position: initial;
+      background-image: none;
+      background-color: #fff;
+      height: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & .bubble {
+        display: none;
+      }
+
+      & .card__person-name {
+        font-size: 1.25rem;
+        color: var(--color-primary);
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.25);
+      }
+    }
+  }
+  & .person__card + .person__card {
+    margin: 0;
+  }
+}
+
+
+
+
