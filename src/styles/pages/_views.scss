@@ -1,25 +1,15 @@
-.header__movies-list {
+.header__view-list {
   margin: 1em 0;
 }
 
-.movies__list-subtitle {
+.view__list-subtitle {
   margin-block-start: 1em;
 }
 
-.views__movies {
+.views__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   justify-items: center;
   gap: 1em;
 }
 
-.movie__card {
-  max-width: 350px;
-  & figure {
-    height: 100%;
-  }
-}
-
-.movie__card + .movie__card {
-  margin: 0
-}

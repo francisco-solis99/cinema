@@ -1,1 +1,14 @@
 @forward 'views';
+
+.movies__list {
+  & .movie__card {
+    max-width: 350px;
+    & figure {
+      height: 100%;
+    }
+  }
+
+  & .movie__card + .movie__card {
+    margin: 0
+  }
+}
