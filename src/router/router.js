@@ -24,7 +24,7 @@ Router.prototype = {
       this.isFirstLoad = false;
       return;
     }
-    const routeFinded = this.routes.find(route => route.hashStart.startsWith(routeName));
+    const routeFinded = this.routes.find(route => routeName.startsWith(route.hashStart) && route.hashStart !== '');
     routeFinded.view();
   }
 };

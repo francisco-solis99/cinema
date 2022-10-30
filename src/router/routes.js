@@ -24,5 +24,10 @@ export const routes = [
     name: 'people',
     hashStart: '#people',
     view: async() => await (await import('../pages/people.js')).default()
+  },
+  {
+    name: 'category',
+    hashStart: '#category=',
+    view: async() => await (await import('../pages/categories.js')).default()
   }
 ];
