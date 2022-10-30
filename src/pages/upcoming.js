@@ -6,7 +6,7 @@ export default async function() {
     renderListResults({
       htmlSelectorSection: '.upcoming__movies',
       callbackRender: createMovieCard,
-      urlName: 'upcomingMovies'
+      urlInfo: 'upcomingMovies'
     });
   });
   await import('../styles/pages/movies-list.scss');

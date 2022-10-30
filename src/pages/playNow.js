@@ -6,7 +6,7 @@ export default async function() {
     renderListResults({
       htmlSelectorSection: '.play-now__movies',
       callbackRender: createMovieCard,
-      urlName: 'nowPlayingMovies'
+      urlInfo: 'nowPlayingMovies'
     });
   });
   await import('../styles/pages/movies-list.scss');

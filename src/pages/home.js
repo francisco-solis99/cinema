@@ -13,21 +13,21 @@ export default function() {
   renderListResults({
     htmlSelectorSection: '.section__tendencies .movies__cards',
     callbackRender: createMovieCard,
-    urlName: 'trendingMovies',
+    urlInfo: 'trendingMovies',
     numItems: 10
   });
   // render the now playing movies
   renderListResults({
     htmlSelectorSection: '.section__play-now .movies__cards',
     callbackRender: createMovieCard,
-    urlName: 'nowPlayingMovies',
+    urlInfo: 'nowPlayingMovies',
     numItems: 10
   });
   // render the upcoming movies
   renderListResults({
     htmlSelectorSection: '.section__upcoming .movies__cards',
     callbackRender: createMovieCard,
-    urlName: 'upcomingMovies',
+    urlInfo: 'upcomingMovies',
     numItems: 10
   });
 
@@ -35,7 +35,7 @@ export default function() {
   renderListResults({
     htmlSelectorSection: '.section__people .people__cards',
     callbackRender: createPersonCard,
-    urlName: 'trendingPeople',
+    urlInfo: 'trendingPeople',
     numItems: 10
 
   });
@@ -44,12 +44,11 @@ export default function() {
   renderListResults({
     htmlSelectorSection: '.section__categories .categories__items',
     callbackRender: createGenres,
-    urlName: 'categoriesMovies',
+    urlInfo: 'categoriesMovies',
     numItems: 15
   });
 
   const buttonsHome = document.querySelectorAll('.button__primary');
-  console.log(buttonsHome);
 
   buttonsHome.forEach(btn => {
     const hash = btn.dataset.btnmore;

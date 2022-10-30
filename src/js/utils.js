@@ -11,15 +11,19 @@ export const getURLHash = () => document.location.hash;
 
 export const $ = (element = document, selector) => element.querySelector(selector);
 
-export function getDataInJson(url) {
-  return API.get(url)
+export function getDataInJson(url, params = {}) {
+  return API.get(url, {
+    params
+  })
     .then(({ data }) => data)
     .catch(err => console.log(err));
 }
 
-export async function getListResults(urlName) {
-  const { url, prop } = getUrl(urlName);
-  const response = await getDataInJson(url);
+export async function getListResults(urlInfo) {
+  const isObject = typeof urlInfo === 'object';
+
+  const { url, prop } = getUrl(isObject ? urlInfo.name : urlInfo);
+  const response = await getDataInJson(url, urlInfo.params);
   return response[prop];
 }
 
@@ -46,6 +50,10 @@ export function getUrl(label) {
     categoriesMovies: {
       url: '/genre/movie/list',
       prop: 'genres'
+    },
+    moviesCategory: {
+      url: '/discover/movie',
+      prop: 'results'
     }
   };
   return urlsApi[label];

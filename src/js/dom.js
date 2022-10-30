@@ -9,9 +9,9 @@ export async function renderBestTrendingMovie() {
 }
 
 // Render the list results
-export async function renderListResults({ htmlSelectorSection, urlName, callbackRender, numItems }) {
+export async function renderListResults({ htmlSelectorSection, urlInfo, callbackRender, numItems }) {
   const section = document.querySelector(htmlSelectorSection);
-  const list = await getListResults(urlName);
+  const list = await getListResults(urlInfo);
   const fragment = document.createDocumentFragment();
 
   list.slice(0, numItems ?? list.lenght).forEach(item => {
@@ -84,7 +84,7 @@ export function createGenres(genre) {
   const categoryElement = document.createElement('div');
   categoryElement.classList.add('category__item', `category__item-${id}}`);
   categoryElement.innerHTML = `
-    <a href="/" class="category__name">
+    <a href="#category=${id}-${name}" class="category__name">
       <span class="category__square" style="background-color:${colorCategory}"></span>
       <span>${name}</span>
     </a>

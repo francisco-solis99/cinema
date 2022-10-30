@@ -6,7 +6,7 @@ export default async function() {
     renderListResults({
       htmlSelectorSection: '.trending__movies',
       callbackRender: createMovieCard,
-      urlName: 'trendingMovies'
+      urlInfo: 'trendingMovies'
     });
   });
   await import('../styles/pages/movies-list.scss');

@@ -6,7 +6,7 @@ export default async function() {
     renderListResults({
       htmlSelectorSection: '.people__actors',
       callbackRender: createPersonCard,
-      urlName: 'trendingPeople'
+      urlInfo: 'trendingPeople'
     });
   });
   await import('../styles/pages/people-list.scss');
