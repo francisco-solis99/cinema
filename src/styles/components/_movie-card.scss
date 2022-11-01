@@ -24,11 +24,15 @@
   }
 
   & .card__poster {
-    object-fit: cover;
-    transition: transform 200ms;
-    opacity: 1;
+    width: 100%;
     min-width: 200px;
-    min-height: 350px;
+    // max-width: 300px;
+    min-height: 200px;
+    max-height: 350px;
+    object-fit: cover;
+    opacity: 1;
+    will-change: trasnform;
+    transition: transform 200ms;
 
     &:is(:active, :hover) {
       transform: scale(1.05);
