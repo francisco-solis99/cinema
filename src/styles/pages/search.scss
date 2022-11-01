@@ -1,0 +1,39 @@
+@forward 'views';
+@forward 'movies-list';
+
+
+.section {
+
+  .searcher {
+    width: 80%;
+    margin: 0 auto;
+    margin-block-end: 2em;
+
+    .searcher__input {
+      padding: .5em .75em;
+    }
+
+    .searcher__button {
+      min-width: 4em;
+      max-width: 6em;
+    }
+  }
+}
+
+.search__result-text {
+  margin-block: 1em;
+}
+
+.filter__movies  {
+  min-height: 60vh;
+  .movie__card {
+    .card__poster-wrapper {
+      background-color: white;
+    }
+
+    .card__poster {
+      height: 100%;
+      animation: none;
+    }
+  }
+}
