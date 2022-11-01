@@ -55,7 +55,18 @@ export default function() {
     btn.addEventListener('click', () => {
       location.hash = `#${hash}`;
       // window.history.pushState({}, null, `#${hash}`);
-      // window.history.pushState({}, null, `#${hash}`);
     });
   });
+
+  const searchButton = document.querySelector('.searcher__button');
+  const searchInput = document.querySelector('.searcher__input');
+  searchButton.addEventListener('click', () => searchMovie(searchInput.value));
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    searchMovie(searchInput.value);
+  });
+}
+
+function searchMovie(searchText) {
+  location.hash = `#search=${searchText}`;
 }
