@@ -22,9 +22,11 @@ Router.prototype = {
       const home = this.routes[0];
       home.view();
       this.isFirstLoad = false;
+      window.scrollTo({ top: 0 });
       return;
     }
     const routeFinded = this.routes.find(route => routeName.startsWith(route.hashStart) && route.hashStart !== '');
     routeFinded.view();
+    window.scrollTo({ top: 0 });
   }
 };
