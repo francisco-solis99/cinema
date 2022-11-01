@@ -1,4 +1,4 @@
-import { getListResults, loadDefaultImagePerson } from './utils.js';
+import { getListResults, loadDefaultImage } from './utils.js';
 
 // Render the most tendencie movie
 export async function renderBestTrendingMovie() {
@@ -45,6 +45,11 @@ export function createMovieCard(movie) {
       </figcaption>
     </figure>
   `;
+  const movieImg = card.querySelector('img');
+  movieImg.addEventListener('error', (e) => {
+    movieImg.classList.add('unload');
+    loadDefaultImage(e);
+  });
   return card;
 }
 
@@ -72,7 +77,7 @@ export function createPersonCard(person) {
   const personImg = personCard.querySelector('img');
   personImg.addEventListener('error', (e) => {
     personCard.classList.add('unload');
-    loadDefaultImagePerson(e);
+    loadDefaultImage(e);
   });
   return personCard;
 }

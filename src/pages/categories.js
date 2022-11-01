@@ -19,6 +19,6 @@ export default async function() {
   });
   await import('../styles/pages/movies-list.scss');
 
-  const categoryTitlte = document.querySelector('.view__list-subtitle');
-  categoryTitlte.textContent = nameCategory;
+  const categoryTitle = document.querySelector('.view__list-subtitle');
+  categoryTitle.textContent = decodeURI(nameCategory); // decode the url to avoid strange characters
 }

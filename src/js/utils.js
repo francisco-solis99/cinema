@@ -54,6 +54,10 @@ export function getUrl(label) {
     moviesCategory: {
       url: '/discover/movie',
       prop: 'results'
+    },
+    searchMovies: {
+      url: '/search/movie',
+      prop: 'results'
     }
   };
   return urlsApi[label];
@@ -62,18 +66,25 @@ export function getUrl(label) {
 export async function render(templateId, callback) {
   const htmlTemplate = $(document, templateId);
   const html = htmlTemplate.content.cloneNode(true);
-  document.body.replaceChildren();
-  document.body.appendChild(html);
+  const app = document.querySelector('#app');
+  app.replaceChildren();
+  app.appendChild(html);
 
   callback();
 }
 
-export function loadDefaultImagePerson(e) {
+export function loadDefaultImage(e) {
   e.target.onerror = null;
   e.target.src = defualtImages.imagePerson;
-  e.target.removeEventListener('error', loadDefaultImagePerson);
+  e.target.removeEventListener('error', loadDefaultImage);
 }
 
 const defualtImages = {
   imagePerson: 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
 };
+
+// export function changeHashWithEvent(element, hash) {
+//   element.addEventListener('click', () => {
+//     location.hash = hash;
+//   });
+// }
