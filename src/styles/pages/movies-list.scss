@@ -3,12 +3,16 @@
 .movies__list {
   & .movie__card {
     max-width: 350px;
-    & figure {
+    & .card__poster-wrapper {
+      display: flex;
+      flex-direction: column;
       height: 100%;
     }
   }
-
-  & .movie__card + .movie__card {
+  .movie__card + .movie__card {
     margin: 0
   }
 }
+
+
+
