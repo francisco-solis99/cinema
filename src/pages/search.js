@@ -3,7 +3,7 @@ import { render } from '../js/utils.js';
 
 export default async function() {
   const [, query] = location.hash.split('=');
-
+  const queryDecoded = decodeURI(query);
   render('#searcher__view', () => {
     renderListResults({
       htmlSelectorSection: '.filter__movies',
@@ -11,14 +11,14 @@ export default async function() {
       urlInfo: {
         name: 'searchMovies',
         params: {
-          query
+          query: queryDecoded
         }
       }
     });
   });
 
   const resultsText = document.querySelector('.search__result-text');
-  resultsText.textContent = `Results for "${decodeURI(query)}"`; // decode the url to avoid strange characters
+  resultsText.textContent = `Results for "${queryDecoded}"`; // decode the url to avoid strange characters
 
   const searchButton = document.querySelector('.searcher__button');
   const searchInput = document.querySelector('.searcher__input');
