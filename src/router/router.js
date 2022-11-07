@@ -4,6 +4,7 @@ import { routes } from './routes.js';
 export function Router() {
   this.routes = routes;
   this.isFirstLoad = true;
+  // this.init();
 }
 
 Router.prototype = {
