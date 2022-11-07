@@ -96,3 +96,18 @@ export function createGenres(genre) {
   `;
   return categoryElement;
 }
+
+export function addBackButton(cssSelector) {
+  const element = document.querySelector(cssSelector);
+  element.addEventListener('click', () => {
+    console.log(window.history);
+    const backUrl = window.history.state;
+    console.log(backUrl);
+    if (!backUrl) {
+      window.history.back();
+      return;
+    }
+    window.location.hash = '';
+    // window.history.back();
+  });
+}

@@ -1,4 +1,4 @@
-import { createMovieCard, renderListResults } from '../js/dom.js';
+import { createMovieCard, renderListResults, addBackButton } from '../js/dom.js';
 import { render } from '../js/utils.js';
 
 export default async function() {
@@ -9,5 +9,7 @@ export default async function() {
       urlInfo: 'trendingMovies'
     });
   });
+
+  addBackButton('.button__back');
   await import('../styles/pages/movies-list.scss');
 }

@@ -1,4 +1,4 @@
-import { createMovieCard, renderListResults } from '../js/dom.js';
+import { createMovieCard, renderListResults, addBackButton } from '../js/dom.js';
 import { render } from '../js/utils.js';
 
 export default async function() {
@@ -28,6 +28,7 @@ export default async function() {
     searchMovie(searchInput.value);
   });
 
+  addBackButton('.button__back');
   await import('../styles/pages/search.scss');
 }
 
