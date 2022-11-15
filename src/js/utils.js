@@ -20,15 +20,17 @@ export function getDataInJson(url, params = {}) {
 }
 
 export async function getListResults(urlInfo) {
-  const isObject = typeof urlInfo === 'object';
-
-  const { url, prop } = getUrl(isObject ? urlInfo.name : urlInfo);
+  const { url, prop } = getUrl(urlInfo);
   const response = await getDataInJson(url, urlInfo.params);
+  if (!prop) return response;
   return response[prop];
 }
 
 // Get the API url
-export function getUrl(label) {
+export function getUrl(urlInfo) {
+  const isObject = typeof urlInfo === 'object';
+  const label = isObject ? urlInfo.name : urlInfo;
+
   const urlsApi = {
     trendingMovies: {
       url: '/trending/movie/week',
@@ -58,8 +60,26 @@ export function getUrl(label) {
     searchMovies: {
       url: '/search/movie',
       prop: 'results'
+    },
+    movie: {
+      url: '/movie',
+      prop: null
+    },
+    similarMovies: {
+      url: '/movie',
+      prop: 'results'
+    },
+    cast: {
+      url: '/movie',
+      prop: 'cast'
     }
   };
+
+  if (urlInfo.subpath) {
+    urlsApi[label].url = `${urlsApi[label].url}${urlInfo.subpath}`;
+    return urlsApi[label];
+  }
+
   return urlsApi[label];
 };
 
