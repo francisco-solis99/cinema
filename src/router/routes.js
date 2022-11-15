@@ -34,5 +34,10 @@ export const routes = [
     name: 'search',
     hashStart: '#search=',
     view: async() => await (await import('../pages/search.js')).default()
+  },
+  {
+    name: 'movie',
+    hashStart: '#movie=',
+    view: async() => await (await import('../pages/movie.js')).default()
   }
 ];

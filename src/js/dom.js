@@ -27,7 +27,6 @@ export function createMovieCard(movie) {
   const { poster_path: posterPath, title: movieName, release_date: date, vote_average: score, id } = movie;
   const posterUrl = `https://www.themoviedb.org/t/p/w300/${posterPath}`;
   const card = document.createElement('arcticle');
-  card.dataset.movieId = id;
   card.classList.add('movie__card');
   card.innerHTML = `
     <figure class="card__poster-wrapper">
@@ -50,6 +49,12 @@ export function createMovieCard(movie) {
     movieImg.classList.add('unload');
     loadDefaultImage(e);
   });
+
+  // Listener to change the view to the movie detail view
+  card.addEventListener('click', () => {
+    location.hash = `#movie=${id}`;
+  });
+
   return card;
 }
 
@@ -110,4 +115,97 @@ export function addBackButton(cssSelector) {
     window.location.hash = '';
     // window.history.back();
   });
+}
+
+export async function renderMovieView({ htmlSelector, urlInfo }) {
+  const [urlMovie, urlCredits] = urlInfo;
+  const htmlElement = document.querySelector(htmlSelector);
+  const movieDetails = await getListResults(urlMovie);
+  const credits = await getListResults(urlCredits);
+
+  const header = document.querySelector('.header__movie-details');
+  header.style.backgroundImage = `linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${movieDetails.backdrop_path}')`;
+  const imgPoster = header.querySelector('.movie__poster-img');
+  imgPoster.src = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieDetails.poster_path}`;
+  imgPoster.alt = `Poster - ${movieDetails.title}`;
+
+  const detailsSection = createMovieDetails(movieDetails, credits);
+  htmlElement.appendChild(detailsSection);
+}
+
+function createMovieDetails(data, credits) {
+  const article = document.createElement('article');
+  article.classList.add('movie__resume');
+  const insertCategories = (categories) => categories
+    .map(({ id, name }) => `<li class="categorie"><a href="http://localhost:5173/#category=${id}-${name}">${name}</a></li>`).join('');
+
+  console.log(credits);
+  const producer = credits.crew.find(member => member.job === 'Producer');
+  const director = credits.crew.find(member => member.job === 'Director');
+
+  article.innerHTML = /* html */`
+      <div class="movie__grade">
+        <span class="movie__grade-number">${Math.ceil(data.vote_average * 10)}%</span>
+        <div class="movie__grade-bar"></div>
+      </div>
+
+      <div class="movie__title">
+        <h2 class="movie__title-text">${data.title}</h2>
+        <ul class="movie__categories">
+          ${insertCategories(data.genres)}
+        </ul>
+      </div>
+
+      <div class="movie__resume">
+        <h3 class="movie__resume-text">Overview</h3>
+        <p class="movie__resume-text">${data.overview}</p>
+      </div>
+
+      <div class="movie__data">
+        <p>
+          <strong>Language</strong>
+          <em>${data.spoken_languages[0].english_name}</em>
+        </p>
+        <p>
+          <strong>Country</strong>
+          <em>${data.production_countries[0].name}</em>
+        </p>
+        <p>
+          <strong>Director</strong>
+          <em>${director?.name ?? 'N/A'}</em>
+        </p>
+        <p>
+          <strong>Producer</strong>
+          <em>${producer?.name ?? 'N/A'}</em>
+        </p>
+      </div>
+  `;
+  return article;
+}
+
+export function createCastCard(castPerson) {
+  const characterCard = document.createElement('article');
+  const { name, profile_path: profilePath, character } = castPerson;
+  characterCard.classList.add('person__card');
+  characterCard.innerHTML = `
+    <picture class="card__cast-wrapper">
+      <img src="https://www.themoviedb.org/t/p/w300/${profilePath}" alt="Actor Photo - ${name}" class="card__cast-img">
+    </picture>
+    <div class="">
+      <h4 class="card__cast-name">${name}</h4>
+      <p class="card__cast-name">${character}</p>
+    </div>
+  `;
+
+  // Check the image and load the dafault it is a error in load
+  const personImg = characterCard.querySelector('img');
+  personImg.addEventListener('error', (e) => {
+    characterCard.classList.add('unload');
+    loadDefaultImage(e);
+  });
+  return characterCard;
+}
+
+export function renderGallery() {
+
 }
