@@ -2,6 +2,10 @@
 
 .movies__cards {
   @include cards.card__container;
+  width: auto;
+  // white-space: nowrap;
+  // text-overflow: ellipsis;
+  gap: 0 1.25em;
 }
 
 .movie__card {
@@ -16,10 +20,12 @@
   // }
 
   & .card__poster-wrapper {
-    overflow: hidden;
-    position: relative;
+    display: block;
+    height: 100%;
     padding: 1em;
-    padding-bottom: 0;
+    padding-bottom: 0.5em;
+    position: relative;
+    overflow: hidden;
     background-color: #fff;
   }
 
@@ -27,8 +33,7 @@
     width: 100%;
     min-width: 200px;
     // max-width: 300px;
-    min-height: 200px;
-    max-height: 350px;
+    max-height: 300px;
     object-fit: cover;
     opacity: 1;
     will-change: trasnform;
@@ -48,8 +53,4 @@
       margin-inline-start: 0.25em;
     }
   }
-}
-
-.movie__card+.movie__card {
-  margin-inline-start: 1.25em;
 }
