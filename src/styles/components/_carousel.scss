@@ -1,0 +1,26 @@
+.section__title {
+  font-size: 2rem;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel__button {
+  height: 100%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+}
+
+.carousel__button-left {
+  left: -50px;
+}
+
+.carousel__button-right {
+  right: -50px;
+}
