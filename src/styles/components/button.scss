@@ -11,10 +11,11 @@
 }
 
 .button__primary {
-  padding: .25em .75em;
+  padding: .45em 1em;
   border-radius: 0.45em;
   background-color: var(--color-secundary);
   transition: all ease-in 250ms;
+  font-weight: 600;
 }
 
 .button__primary:hover,
