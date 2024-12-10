@@ -3,8 +3,8 @@
 .header__movie-details {
   position: relative;
   min-height: 70vh;
-  padding-block-start: 1.25em;
-  background: var(--color-tertiry);
+  padding-block: 1.25em;
+  // background: var(--color-tertiry);
   // background-image: linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -12,7 +12,202 @@
   margin: 0;
 }
 
+.movie__poster {
+  margin-block-start: 1.5em;
+  figure {
+    // margin: 0 auto;
+    max-width: 250px;
+    box-shadow: 0 0 10px 0  rgba(0, 0, 0, 0.25);
+    opacity: 0.85;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: blanchedalmond;
+  }
+}
+
 
 .button__back {
   padding: 0;
+}
+
+
+.movie__info {
+  margin-block-start: 1em;
+}
+
+.movie__article {
+  margin-block-start: 1.5em;
+  margin-block-end: 2em;
+}
+
+.movie__grade {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .movie__grade-number {
+    font-size: 1.25rem;
+  }
+
+  .movie__grade-bar {
+    --color-bar: #41d059;
+    margin-block-start: 0.1em;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 5em;
+    min-height: 1em;
+    background-color: var(--color-white-gray);
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 76%;
+      height: 100%;
+      display: flex;
+      left: 0;
+      border-bottom-left-radius: 3em;
+      border-top-left-radius: 3em;
+      background-color: var(--color-bar);
+    }
+  }
+}
+
+
+.movie__info-wrapped {
+  width: 80%;
+  margin: 0 auto;
+  min-width: 300px;
+  display: grid;
+  gap: 1.25em 0;
+}
+
+.movie__resume {
+  max-width: 948px;
+  margin: 0 auto;
+  .movie__resume-title {
+    font-size: 1.5rem;
+  }
+  .movie__resume-text {
+    text-wrap: pretty;
+    line-height: 1.7rem;
+  }
+}
+
+
+
+.movie__title {
+  .movie__title-text {
+    text-align: center;
+    font-size: 3rem;
+    margin-block-end: 0.15em;
+  }
+
+  .movie__categories {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+    & .categorie {
+      a {
+        color: var(--color-white-gray);
+        text-decoration: underline;
+        text-underline-offset: 0.15rem;
+      }
+    }
+
+    & .categorie + .categorie {
+      margin-inline-start: 0.5em;
+    }
+
+    // Adding coma to each category except the last one
+    .categorie:not(:last-child)::after{
+      content: ',';
+      display: inline;
+      color: var(--color-white-gray);
+    }
+  }
+}
+
+
+.movie__data {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  justify-items: center;
+  p {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+
+.movie__cast {
+  margin-block-start: 2em;
+  & .cast__persons {
+    margin-block-start: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
+    gap: 1em;
+
+    & .card__cast-wrapper {
+      max-width: 200px;
+    }
+  }
+}
+
+.person__card + .person__card {
+  margin: 0;
+}
+
+
+.movie__similars {
+  margin-block-start: 2em;
+
+  & h2 {
+    margin-block-end: 0.75em;
+  }
+
+  & .similar__movies {
+    width: auto;
+    // white-space: nowrap;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    scroll-snap-type: x mandatory;
+
+    gap: 0.75em;
+    scroll-padding: 2em;
+
+
+    & .movie__card {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+
+      & .card__poster-wrapper {
+        display: block;
+        height: 100%;
+
+        & img {
+          max-height: 300px;
+        }
+      }
+
+      & .card__poster {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
 }
