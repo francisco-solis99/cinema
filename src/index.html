@@ -35,6 +35,7 @@
 </head>
 
 <body>
+  <!-- Initial view -->
   <div class="app" id="app">
     <header class="header">
       <div class="overlay"></div>
@@ -61,13 +62,22 @@
     </header>
 
     <main class="hero">
+      <!-- Carousel -->
       <section class="section section__tendencies" id="tendencies">
         <div class="container">
           <div class="section__info row">
             <h2 class="section__title">Tendencies</h2>
-            <button class="button button__primary" data-btnMore="trends">see more</button>
+            <button class="button button__primary" data-btnMore="trends">View more</button>
           </div>
-          <div class="movies__cards">
+          <div class="carousel">
+            <button class="carousel__button carousel__button-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
+            </button>
+            <div class="movies__cards carousel__inner">
+            </div>
+            <button class="carousel__button carousel__button-right">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
+            </button>
           </div>
         </div>
       </section>
@@ -76,9 +86,17 @@
         <div class="container">
           <div class="section__info row">
             <h2 class="section__title">Playing now</h2>
-            <button class="button button__primary" data-btnMore="now">see more</button>
+            <button class="button button__primary" data-btnMore="now">View more</button>
           </div>
-          <div class="movies__cards">
+          <div class="carousel">
+            <button class="carousel__button carousel__button-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
+            </button>
+            <div class="movies__cards carousel__inner">
+            </div>
+            <button class="carousel__button carousel__button-right">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
+            </button>
           </div>
         </div>
       </section>
@@ -87,9 +105,17 @@
         <div class="container">
           <div class="section__info row">
             <h2 class="section__title">Upcoming</h2>
-            <button class="button button__primary" data-btnMore="upcoming">see more</button>
+            <button class="button button__primary" data-btnMore="upcoming">View more</button>
           </div>
-          <div class="movies__cards">
+          <div class="carousel">
+            <button class="carousel__button carousel__button-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
+            </button>
+            <div class="movies__cards carousel__inner">
+            </div>
+            <button class="carousel__button carousel__button-right">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
+            </button>
           </div>
         </div>
       </section>
@@ -98,9 +124,17 @@
         <div class="container">
           <div class="section__info row">
             <h2 class="section__title">People</h2>
-            <button class="button button__primary" data-btnMore="people">see more</button>
+            <button class="button button__primary" data-btnMore="people">View more</button>
           </div>
-          <div class="people__cards">
+          <div class="carousel">
+            <button class="carousel__button carousel__button-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
+            </button>
+            <div class="people__cards carousel__inner">
+            </div>
+            <button class="carousel__button carousel__button-right">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
+            </button>
           </div>
         </div>
       </section>
@@ -117,8 +151,9 @@
         </div>
       </section>
     </main>
+
     <footer class="footer">
-      <p class="footer__text">Made by <a href="https://github.com/francisco-solis99">Francisco</a> with 💛</p>
+      <p class="footer__text">Made by <a href="https://github.com/francisco-solis99">Francisco</a> with love💛</p>
     </footer>
   </div>
 </body>
@@ -270,12 +305,23 @@
       <hr>
       <section class="movie__cast">
         <h2>Top Billed Cast</h2>
+        <div class="cast__persons">
+        </div>
       </section>
       <section class="movie__gallery">
         <h2>Gallery</h2>
       </section>
       <section class="movie__similars">
         <h2>Similar movies</h2>
+        <div class="carousel">
+          <button class="carousel__button carousel__button-left">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
+          </button>
+          <div class="similar__movies carousel__inner"></div>
+          <button class="carousel__button carousel__button-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
+          </button>
+        </div>
       </section>
     </div>
   </main>
@@ -287,20 +333,3 @@
 </template>
 
 </html>
-
-
-
-<!-- TODOs
--> Refactor the repetitive code for the all the movies views (trending, upcoming, play now, and even people) ✅
--> Refactor the styles for the pages and rename the file pages/trendings.scss ✅
--> Refactor utils function for api calls, maybe in other file ✅
--> Best styles for the all list of movies ✅
--> Footer styles
-=> Load people view ✅
-=> Load default image of person ✅
-=> Load the searcher ✅
-=> Load categories movies view ✅
-=> Load the movies by search ✅
-=> Load movie details view
-=> Refactor the template html for the movies views ✅
--->

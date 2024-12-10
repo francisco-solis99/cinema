@@ -1,4 +1,4 @@
-import { getListResults, loadDefaultImage } from './utils.js';
+import { getListResults, loadDefaultImage, scrollToLeft, scrollToRight } from './utils.js';
 
 // Render the most tendencie movie
 export async function renderBestTrendingMovie() {
@@ -22,7 +22,7 @@ export async function renderListResults({ htmlSelectorSection, urlInfo, callback
   section.appendChild(fragment);
 }
 
-// Create a movie card with some of teh movie information
+// Create a movie card with some of the movie information
 export function createMovieCard(movie) {
   const { poster_path: posterPath, title: movieName, release_date: date, vote_average: score, id } = movie;
   const posterUrl = `https://www.themoviedb.org/t/p/w300/${posterPath}`;
@@ -135,51 +135,62 @@ export async function renderMovieView({ htmlSelector, urlInfo }) {
 
 function createMovieDetails(data, credits) {
   const article = document.createElement('article');
-  article.classList.add('movie__resume');
+  article.classList.add('movie__article');
   const insertCategories = (categories) => categories
     .map(({ id, name }) => `<li class="categorie"><a href="http://localhost:5173/#category=${id}-${name}">${name}</a></li>`).join('');
 
-  console.log(credits);
   const producer = credits.crew.find(member => member.job === 'Producer');
   const director = credits.crew.find(member => member.job === 'Director');
+  const movieVote = Math.ceil(data.vote_average * 10);
 
   article.innerHTML = /* html */`
       <div class="movie__grade">
-        <span class="movie__grade-number">${Math.ceil(data.vote_average * 10)}%</span>
+        <span class="movie__grade-number">${movieVote}%</span>
         <div class="movie__grade-bar"></div>
       </div>
 
-      <div class="movie__title">
-        <h2 class="movie__title-text">${data.title}</h2>
-        <ul class="movie__categories">
-          ${insertCategories(data.genres)}
-        </ul>
-      </div>
+      <div class="movie__info-wrapped">
+        <div class="movie__title">
+          <h2 class="movie__title-text">${data.title}</h2>
+          <ul class="movie__categories">
+            ${insertCategories(data.genres)}
+          </ul>
+        </div>
 
-      <div class="movie__resume">
-        <h3 class="movie__resume-text">Overview</h3>
-        <p class="movie__resume-text">${data.overview}</p>
-      </div>
+        <div class="movie__resume">
+          <h3 class="movie__resume-title">Overview</h3>
+          <p class="movie__resume-text">${data.overview}</p>
+        </div>
 
-      <div class="movie__data">
-        <p>
-          <strong>Language</strong>
-          <em>${data.spoken_languages[0].english_name}</em>
-        </p>
-        <p>
-          <strong>Country</strong>
-          <em>${data.production_countries[0].name}</em>
-        </p>
-        <p>
-          <strong>Director</strong>
-          <em>${director?.name ?? 'N/A'}</em>
-        </p>
-        <p>
-          <strong>Producer</strong>
-          <em>${producer?.name ?? 'N/A'}</em>
-        </p>
+        <div class="movie__data">
+          <p>
+            <strong>Language</strong>
+            <em>${data.spoken_languages[0].english_name}</em>
+          </p>
+          <p>
+            <strong>Country</strong>
+            <em>${data.production_countries[0].name}</em>
+          </p>
+          <p>
+            <strong>Director</strong>
+            <em>${director?.name ?? 'N/A'}</em>
+          </p>
+          <p>
+            <strong>Producer</strong>
+            <em>${producer?.name ?? 'N/A'}</em>
+          </p>
+        </div>
       </div>
   `;
+
+  const bar = article.querySelector('.movie__grade-bar');
+
+  if (movieVote < 35) bar.style.setProperty('--color-bar', '#ff3908');
+  else if (movieVote > 35 && movieVote < 70) bar.style.setProperty('--color-bar', '#FFB608');
+  else bar.style.setProperty('--color-bar', '#41d059');
+
+  console.log(bar.style.getPropertyValue('--color-bar'));
+
   return article;
 }
 
@@ -208,4 +219,18 @@ export function createCastCard(castPerson) {
 
 export function renderGallery() {
 
+}
+
+export function addCarouselMovement() {
+  const carousels = document.querySelectorAll('.carousel');
+  carousels.forEach(carousel => {
+    const leftBtn = carousel.querySelector('.carousel__button-left');
+    const rightBtn = carousel.querySelector('.carousel__button-right');
+
+    const innerCarousel = carousel.querySelector('.carousel__inner');
+    const scrollPerItemValue = carousel.clientWidth - 20;
+
+    leftBtn.addEventListener('click', () => scrollToLeft(innerCarousel, scrollPerItemValue));
+    rightBtn.addEventListener('click', () => scrollToRight(innerCarousel, scrollPerItemValue));
+  });
 }

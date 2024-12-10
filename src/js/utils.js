@@ -2,15 +2,18 @@ import { API } from './api.js';
 
 export const insertHTML = (el, html) => el.insertAdjacentHTML('afterbegin', html);
 
+// Replace html and insert another
 export const replaceHTML = (el, html) => {
   el.replaceChildren();
   insertHTML(el, html);
 };
 
+// Get the url hash
 export const getURLHash = () => document.location.hash;
-
+// Select an element from html
 export const $ = (element = document, selector) => element.querySelector(selector);
 
+// Get the data from the API
 export function getDataInJson(url, params = {}) {
   return API.get(url, {
     params
@@ -19,6 +22,7 @@ export function getDataInJson(url, params = {}) {
     .catch(err => console.log(err));
 }
 
+// Return the data from the API call
 export async function getListResults(urlInfo) {
   const { url, prop } = getUrl(urlInfo);
   const response = await getDataInJson(url, urlInfo.params);
@@ -83,6 +87,7 @@ export function getUrl(urlInfo) {
   return urlsApi[label];
 };
 
+// Render some page according to the hash changing
 export async function render(templateId, callback) {
   const htmlTemplate = $(document, templateId);
   const html = htmlTemplate.content.cloneNode(true);
@@ -102,4 +107,20 @@ export function loadDefaultImage(e) {
   e.target.onerror = null;
   e.target.src = defualtImages.imagePerson;
   e.target.removeEventListener('error', loadDefaultImage);
+}
+
+export function scrollToLeft(carousel, scrollPerItem) {
+  carousel.scrollTo({
+    top: 0,
+    left: (carousel.scrollLeft - scrollPerItem),
+    behavior: 'smooth'
+  });
+}
+
+export function scrollToRight(carousel, scrollPerItem) {
+  carousel.scrollTo({
+    top: 0,
+    left: (carousel.scrollLeft + scrollPerItem),
+    behavior: 'smooth'
+  });
 }

@@ -3,7 +3,8 @@ import {
   renderListResults,
   createMovieCard,
   createPersonCard,
-  createGenres
+  createGenres,
+  addCarouselMovement
 } from '../js/dom.js';
 
 export default function() {
@@ -48,8 +49,13 @@ export default function() {
     numItems: 15
   });
 
-  const buttonsHome = document.querySelectorAll('.button__primary');
+  // Events
 
+  // Carousels
+  addCarouselMovement();
+
+  // Buttons see more home and go back
+  const buttonsHome = document.querySelectorAll('.button__primary');
   buttonsHome.forEach(btn => {
     const hash = btn.dataset.btnmore;
     btn.addEventListener('click', () => {

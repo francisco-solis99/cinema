@@ -4,7 +4,8 @@ import {
   renderListResults,
   createMovieCard,
   createCastCard,
-  renderGallery
+  renderGallery,
+  addCarouselMovement
 } from '../js/dom.js';
 
 import { render } from '../js/utils.js';
@@ -29,7 +30,7 @@ export default async function() {
 
     // Render the cast
     renderListResults({
-      htmlSelectorSection: '.movie__cast',
+      htmlSelectorSection: '.cast__persons',
       callbackRender: createCastCard,
       urlInfo: {
         name: 'cast',
@@ -49,15 +50,16 @@ export default async function() {
 
     // render the similar movies
     renderListResults({
-      htmlSelectorSection: '.movie__similars',
+      htmlSelectorSection: '.similar__movies',
       callbackRender: createMovieCard,
       urlInfo: {
         name: 'similarMovies',
-        subpath: `/${idMovie}/similar`
+        subpath: `/${idMovie}/recommendations`
       },
-      numItems: 5
+      numItems: 10
     });
   });
   addBackButton('.button__back');
+  addCarouselMovement();
   await import('../styles/pages/movie-details.scss');
 }
