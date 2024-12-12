@@ -3,13 +3,13 @@
 }
 
 .view__list-subtitle {
-  margin-block-start: 1em;
+  font-size: 1.75rem;
 }
 
 .views__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-items: center;
-  gap: 1em;
+  gap: 1em 1.25em;
 }
 
