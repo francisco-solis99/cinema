@@ -6,10 +6,12 @@
 
   .searcher {
     width: 80%;
+    max-width: 768px;
     margin: 0 auto;
     margin-block-end: 2em;
 
     .searcher__input {
+      font-size: 1.15rem;
       padding: .5em .75em;
     }
 
@@ -22,6 +24,7 @@
 
 .search__result-text {
   margin-block: 1em;
+  font-size: 1.75rem;
 }
 
 .filter__movies  {
