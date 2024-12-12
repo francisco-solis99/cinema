@@ -19,6 +19,8 @@ export default async function() {
   });
 
   const categoryTitle = document.querySelector('.view__list-subtitle');
+  categoryTitle.classList.remove('skeleton');
+  categoryTitle.classList.remove('skeleton-title');
   categoryTitle.textContent = decodeURI(nameCategory); // decode the url to avoid strange characters
   addBackButton('.button__back');
   await import('../styles/pages/movies-list.scss');

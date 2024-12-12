@@ -5,7 +5,11 @@ export async function renderBestTrendingMovie() {
   const header = document.querySelector('.header');
   const [bestTrendingMovie] = await getListResults('trendingMovies');
   header.style.backgroundImage = `linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${bestTrendingMovie.backdrop_path}')`;
-  header.querySelector('.best__movie-title').textContent = bestTrendingMovie.title;
+  const movieTitle = header.querySelector('.header h2');
+  movieTitle.textContent = bestTrendingMovie.title;
+  movieTitle.classList.add('best__movie-title');
+  movieTitle.classList.remove('skeleton-text');
+  movieTitle.classList.remove('skeleton');
 }
 
 // Render the list results
@@ -19,6 +23,7 @@ export async function renderListResults({ htmlSelectorSection, urlInfo, callback
     fragment.append(element);
   });
 
+  section.innerHTML = '';
   section.appendChild(fragment);
 }
 
@@ -130,6 +135,7 @@ export async function renderMovieView({ htmlSelector, urlInfo }) {
   imgPoster.alt = `Poster - ${movieDetails.title}`;
 
   const detailsSection = createMovieDetails(movieDetails, credits);
+  htmlElement.innerHTML = '';
   htmlElement.appendChild(detailsSection);
 }
 

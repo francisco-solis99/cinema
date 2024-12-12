@@ -18,6 +18,8 @@ export default async function() {
   });
 
   const resultsText = document.querySelector('.search__result-text');
+  resultsText.classList.remove('skeleton');
+  resultsText.classList.remove('skeleton-title');
   resultsText.textContent = `Results for "${queryDecoded}"`; // decode the url to avoid strange characters
 
   const searchButton = document.querySelector('.searcher__button');
