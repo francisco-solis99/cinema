@@ -16,9 +16,12 @@
   font-size: 2rem;
 }
 
-.best__movie-title {
+.header h2 {
   position: absolute;
   bottom: 15%;
+}
+
+.best__movie-title {
   width: 80%;
   font-size: 3.5rem;
   line-height: 4.25rem;
@@ -27,4 +30,8 @@
       rgb(13, 23, 53));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.navbar {
+  margin-block-end: 2em;
 }
