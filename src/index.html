@@ -14,10 +14,62 @@
       font-family: var(--font-family-text);
     }
 
+    /* Skeleton styles */
+
     .skeleton {
       opacity: .7;
       animation: skeleton-loading 1s linear infinite alternate;
     }
+
+    .skeleton-title {
+      width: 70%;
+      min-height: 40px;
+    }
+
+    .skeleton-card {
+      width: 250px;
+      height: 380px;
+    }
+
+    .skeleton-category {
+      width: 160px;
+      height: 30px;
+    }
+
+    .skeleton-text {
+      width: 100%;
+      height: 25px;
+    }
+
+    .movie__details .skeleton-title {
+      margin: 0 auto;
+      margin-block-end: 0.75em;
+    }
+
+    .skeleton-text:nth-child(2) {
+      width: 70%;
+      animation-delay: 1.5s;
+    }
+
+    .skeleton__section {
+      margin-block: 2em;
+    }
+
+    .skeleton__wrapper-category {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .skeleton__wrapper-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      place-items: center;
+      gap: 1em;
+    }
+
+
+
 
     @keyframes skeleton-loading  {
       0%{
@@ -57,7 +109,7 @@
             </button>
           </div>
         </nav>
-        <h2 class="best__movie-title">Title of the movie</h2>
+        <h2 class="skeleton-title skeleton"></h2>
       </div>
     </header>
 
@@ -74,6 +126,11 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
             </button>
             <div class="movies__cards carousel__inner">
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
             </div>
             <button class="carousel__button carousel__button-right">
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
@@ -93,6 +150,11 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
             </button>
             <div class="movies__cards carousel__inner">
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
             </div>
             <button class="carousel__button carousel__button-right">
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
@@ -112,6 +174,11 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
             </button>
             <div class="movies__cards carousel__inner">
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
             </div>
             <button class="carousel__button carousel__button-right">
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
@@ -131,6 +198,11 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
             </button>
             <div class="people__cards carousel__inner">
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
             </div>
             <button class="carousel__button carousel__button-right">
               <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
@@ -146,7 +218,15 @@
             <h2 class="section__title">Categories</h2>
           </div>
           <div class="categories__items">
-
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
+            <div class="skeleton skeleton-category"></div>
           </div>
         </div>
       </section>
@@ -184,7 +264,14 @@
   <section class="section">
     <div class="container">
       <div class="views__list trending__movies movies__list">
-
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
       </div>
     </div>
   </section>
@@ -243,7 +330,7 @@
           <h1 class="title">Cinema</h1>
         </a>
       </nav>
-      <h2 class="view__list-subtitle">Search movies</h2>
+      <!-- <h2 class="view__list-subtitle">Search movies</h2> -->
     </div>
   </header>
 
@@ -261,9 +348,16 @@
           </span>
         </button>
       </div>
-      <h3 class="search__result-text"></h3>
+      <h3 class="skeleton skeleton-title search__result-text"></h3>
       <div class="views__list filter__movies movies__list">
-
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
       </div>
     </div>
   </section>
@@ -301,11 +395,33 @@
   <main class="movie__info">
     <div class="container">
       <section class="movie__details">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton__wrapper-category">
+          <span class="skeleton skeleton-category"></span>
+          <span class="skeleton skeleton-category"></span>
+          <span class="skeleton skeleton-category"></span>
+          <span class="skeleton skeleton-category"></span>
+        </div>
+        <div class="skeleton__section">
+          <p class="skeleton skeleton-text"></p>
+          <p class="skeleton skeleton-text"></p>
+        </div>
+        <div class="skeleton__section skeleton__wrapper-details">
+          <span class="skeleton skeleton-category"></span>
+          <span class="skeleton skeleton-category"></span>
+          <span class="skeleton skeleton-category"></span>
+          <span class="skeleton skeleton-category"></span>
+        </div>
       </section>
       <hr>
       <section class="movie__cast">
         <h2>Top Billed Cast</h2>
         <div class="cast__persons">
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
+          <div class="skeleton skeleton-card"></div>
         </div>
       </section>
       <section class="movie__gallery">
@@ -317,7 +433,13 @@
           <button class="carousel__button carousel__button-left">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>
           </button>
-          <div class="similar__movies carousel__inner"></div>
+          <div class="similar__movies carousel__inner">
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+              <div class="skeleton skeleton-card"></div>
+          </div>
           <button class="carousel__button carousel__button-right">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M8.025 22L6.25 20.225L14.475 12L6.25 3.775L8.025 2l10 10z"/></svg>
           </button>
