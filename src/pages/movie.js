@@ -11,8 +11,11 @@ import {
 import { render } from '../js/utils.js';
 
 export default async function() {
-  const [, idMovie] = location.hash.split('=');
+  // Bring the styles
+  await import('../styles/pages/movie-details.scss');
 
+  // get the movie id
+  const [, idMovie] = location.hash.split('=');
   render('#movie-details-view', () => {
     // Render the movie info
     renderMovieView({
@@ -51,7 +54,7 @@ export default async function() {
     // render the similar movies
     renderListResults({
       htmlSelectorSection: '.similar__movies',
-      callbackRender: createMovieCard,
+      callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
       urlInfo: {
         name: 'similarMovies',
         subpath: `/${idMovie}/recommendations`
@@ -59,7 +62,7 @@ export default async function() {
       numItems: 10
     });
   });
+  // Add the carousel interaction and the back button
   addBackButton('.button__back');
   addCarouselMovement();
-  await import('../styles/pages/movie-details.scss');
 }

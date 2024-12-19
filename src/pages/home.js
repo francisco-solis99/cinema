@@ -13,21 +13,21 @@ export default function() {
   // render the trending movies
   renderListResults({
     htmlSelectorSection: '.section__tendencies .movies__cards',
-    callbackRender: createMovieCard,
+    callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
     urlInfo: 'trendingMovies',
     numItems: 10
   });
   // render the now playing movies
   renderListResults({
     htmlSelectorSection: '.section__play-now .movies__cards',
-    callbackRender: createMovieCard,
+    callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
     urlInfo: 'nowPlayingMovies',
     numItems: 10
   });
   // render the upcoming movies
   renderListResults({
     htmlSelectorSection: '.section__upcoming .movies__cards',
-    callbackRender: createMovieCard,
+    callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
     urlInfo: 'upcomingMovies',
     numItems: 10
   });
@@ -35,10 +35,9 @@ export default function() {
   // render the people
   renderListResults({
     htmlSelectorSection: '.section__people .people__cards',
-    callbackRender: createPersonCard,
+    callbackRender: (item) => createPersonCard({ person: item, lazy: false }),
     urlInfo: 'trendingPeople',
     numItems: 10
-
   });
 
   // Render the categories
@@ -49,7 +48,7 @@ export default function() {
     numItems: 15
   });
 
-  // Events
+  // Events and interactions
 
   // Carousels
   addCarouselMovement();
