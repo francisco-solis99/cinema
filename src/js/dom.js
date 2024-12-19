@@ -1,5 +1,18 @@
 import { getListResults, loadDefaultImage, scrollToLeft, scrollToRight } from './utils.js';
 
+// Intersection observer
+const intersectionCallback = (entries) => {
+  entries.forEach((entry) => {
+    const targetElement = entry.target;
+    if (entry.isIntersecting) {
+      // Set url imae to the movie card and unobserve the element
+      targetElement.src = targetElement.dataset.img;
+      observerCardMovie.unobserve(targetElement);
+    }
+  });
+};
+const observerCardMovie = new IntersectionObserver(intersectionCallback);
+
 // Render the most tendencie movie
 export async function renderBestTrendingMovie() {
   const header = document.querySelector('.header');
@@ -18,7 +31,7 @@ export async function renderListResults({ htmlSelectorSection, urlInfo, callback
   const list = await getListResults(urlInfo);
   const fragment = document.createDocumentFragment();
 
-  list.slice(0, numItems ?? list.lenght).forEach(item => {
+  list.slice(0, numItems ?? list.lenght).forEach((item) => {
     const element = callbackRender(item);
     fragment.append(element);
   });
@@ -28,14 +41,14 @@ export async function renderListResults({ htmlSelectorSection, urlInfo, callback
 }
 
 // Create a movie card with some of the movie information
-export function createMovieCard(movie) {
+export function createMovieCard({ movie, lazy = false }) {
   const { poster_path: posterPath, title: movieName, release_date: date, vote_average: score, id } = movie;
   const posterUrl = `https://www.themoviedb.org/t/p/w300/${posterPath}`;
   const card = document.createElement('arcticle');
   card.classList.add('movie__card');
   card.innerHTML = `
     <figure class="card__poster-wrapper">
-      <img src="${posterUrl}" alt="Poster - ${movieName}" class="skeleton card__poster">
+      <img src="${lazy ? '' : posterUrl}" data-img="${lazy ? posterUrl : ''}" alt="Poster - ${movieName}" class="skeleton card__poster">
       <figcaption class="card__caption">
         <h3 class="card__movie-title">${movieName}</h4>
         <span>
@@ -50,9 +63,14 @@ export function createMovieCard(movie) {
     </figure>
   `;
   const movieImg = card.querySelector('img');
+  if (lazy) {
+    observerCardMovie.observe(movieImg);
+  }
+
+  // Listener to default image on error loading case
   movieImg.addEventListener('error', (e) => {
     movieImg.classList.add('unload');
-    loadDefaultImage(e);
+    loadDefaultImage(e, 'imgMovie');
   });
 
   // Listener to change the view to the movie detail view
@@ -64,14 +82,15 @@ export function createMovieCard(movie) {
 }
 
 // Create person card
-export function createPersonCard(person) {
+export function createPersonCard({ person, lazy = false }) {
   const { name, profile_path: profilePath } = person;
   const personCard = document.createElement('article');
   // card.dataset.movieId = id;
+  const profileUrlImg = `https://www.themoviedb.org/t/p/w300/${profilePath}`;
   personCard.classList.add('person__card');
   personCard.innerHTML = `
     <picture class="card__person-wrapper">
-      <img src="https://www.themoviedb.org/t/p/w300/${profilePath}" alt="Actor Photo - ${name}" class="card__person-img">
+      <img src="${lazy ? '' : profileUrlImg}" data-img=${lazy ? profileUrlImg : ''} alt="Actor Photo - ${name}" class="card__person-img">
     </picture>
     <div class="overlay">
       <h4 class="card__person-name">${name}</h4>
@@ -85,9 +104,13 @@ export function createPersonCard(person) {
 
   // Check the image and load the dafault it is a error in load
   const personImg = personCard.querySelector('img');
+  if (lazy) {
+    observerCardMovie.observe(personImg);
+  }
+  // Listener to default image on error loading case
   personImg.addEventListener('error', (e) => {
     personCard.classList.add('unload');
-    loadDefaultImage(e);
+    loadDefaultImage(e, 'imgPerson');
   });
   return personCard;
 }
@@ -218,7 +241,7 @@ export function createCastCard(castPerson) {
   const personImg = characterCard.querySelector('img');
   personImg.addEventListener('error', (e) => {
     characterCard.classList.add('unload');
-    loadDefaultImage(e);
+    loadDefaultImage(e, 'imgPerson');
   });
   return characterCard;
 }
