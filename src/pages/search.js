@@ -1,5 +1,5 @@
-import { createMovieCard, renderListResults, addBackButton } from '../js/dom.js';
-import { render } from '../js/utils.js';
+import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults } from '../js/dom.js';
+import { render, addIntersectionObserverToLoadMore } from '../js/utils.js';
 
 export default async function() {
   // bribng the styles
@@ -18,8 +18,20 @@ export default async function() {
         name: 'searchMovies',
         params: {
           query: queryDecoded
-        }
+        },
+        propertyPath: 'results'
       }
+    }).then(data => {
+      // Intersection observer for load more
+      console.log(data);
+      const footer = document.querySelector('.footer');
+      const renderMoreResultsFn = renderMoreResultsCb(queryDecoded);
+      addIntersectionObserverToLoadMore({
+        callbackIntersecting: renderMoreResultsFn,
+        callbackEndIntersecting: () => renderNoMoreResults({ htmlSelectorSection: '.movies__list' }),
+        elementToObserve: footer,
+        maxPage: data.total_pages
+      });
     });
   });
 
@@ -44,4 +56,22 @@ export default async function() {
 
 function searchMovie(searchText) {
   location.hash = `#search=${searchText}`;
+}
+
+function renderMoreResultsCb(searchTerm) {
+  return function(page) {
+    renderListResults({
+      htmlSelectorSection: '.filter__movies',
+      callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
+      urlInfo: {
+        name: 'searchMovies',
+        params: {
+          page,
+          query: searchTerm
+        },
+        propertyPath: 'results'
+      },
+      toClean: false
+    });
+  };
 }
