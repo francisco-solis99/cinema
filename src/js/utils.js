@@ -24,10 +24,9 @@ export function getDataInJson(url, params = {}) {
 
 // Return the data from the API call
 export async function getListResults(urlInfo) {
-  const { url, prop } = getUrl(urlInfo);
+  const { url } = getUrl(urlInfo);
   const response = await getDataInJson(url, urlInfo.params);
-  if (!prop) return response;
-  return response[prop];
+  return response;
 }
 
 // Get the API url
@@ -124,4 +123,44 @@ export function scrollToRight(carousel, scrollPerItem) {
     left: (carousel.scrollLeft + scrollPerItem),
     behavior: 'smooth'
   });
+}
+
+export function addIntersectionObserverToLoadMore({ callbackIntersecting, callbackEndIntersecting, elementToObserve, maxPage = 5 }) {
+  console.log({ maxPage });
+  let page = 1;
+  const intersectionCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // render more movies
+        page += 1;
+        if (page > maxPage) {
+          observerBottom.unobserve(entry.target);
+          callbackEndIntersecting();
+          return;
+        }
+        callbackIntersecting(page);
+      }
+    });
+  };
+  const observerBottom = new IntersectionObserver(intersectionCallback);
+  observerBottom.observe(elementToObserve, {
+    root: null
+  });
+}
+
+export function getItemFromLocalStorage(keyItem) {
+  const item = JSON.parse(window.localStorage.getItem(keyItem)) ?? {};
+  return item;
+}
+
+export function setItemFromLocalStorage(keyItem, valueToSet) {
+  window.localStorage.setItem(keyItem, JSON.stringify(valueToSet));
+}
+
+export function getNestedProperty({ obj, propertyPath = [] }) {
+  if (typeof propertyPath === 'string') return obj[propertyPath];
+  if (propertyPath.length === 1) return obj[propertyPath[0]];
+
+  const property = propertyPath.shift();
+  return getNestedProperty({ obj: obj[property], propertyPath });
 }
