@@ -4,7 +4,9 @@ import {
   renderListResults,
   createMovieCard,
   createCastCard,
-  renderGallery,
+  createProvider,
+  createReview,
+  // renderGallery,
   addCarouselMovement
 } from '../js/dom.js';
 
@@ -31,24 +33,48 @@ export default async function() {
       ]
     });
 
+    // render providers
+    renderListResults({
+      htmlSelectorSection: '.movie__providers .providers__list',
+      callbackRender: (item) => createProvider({ provider: item }),
+      urlInfo: {
+        name: 'movie',
+        subpath: `/${idMovie}/watch/providers`,
+        propertyPath: ['results', 'US', 'buy']
+      }
+    });
+
     // Render the cast
     renderListResults({
       htmlSelectorSection: '.cast__persons',
       callbackRender: createCastCard,
       urlInfo: {
         name: 'cast',
-        subpath: `/${idMovie}/credits`
+        subpath: `/${idMovie}/credits`,
+        propertyPath: 'cast'
       },
       numItems: 5
     });
 
     // Render the gallery
-    renderGallery({
-      htmlSelectorSection: '.movie__gallery',
+    // renderGallery({
+    //   htmlSelectorSection: '.movie__gallery',
+    //   urlInfo: {
+    //     name: 'movie',
+    //     subpath: `/${idMovie}/images`
+    //   }
+    // });
+
+    // render reviews
+    renderListResults({
+      htmlSelectorSection: '.movie__reviews .reviews__list',
+      callbackRender: (item) => createReview({ review: item }),
       urlInfo: {
         name: 'movie',
-        subpath: `/${idMovie}/images`
-      }
+        subpath: `/${idMovie}/reviews`,
+        propertyPath: ['results']
+      },
+      numItems: 3
     });
 
     // render the similar movies
@@ -57,7 +83,8 @@ export default async function() {
       callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
       urlInfo: {
         name: 'similarMovies',
-        subpath: `/${idMovie}/recommendations`
+        subpath: `/${idMovie}/recommendations`,
+        propertyPath: 'results'
       },
       numItems: 10
     });
