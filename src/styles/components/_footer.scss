@@ -1,0 +1,22 @@
+.footer {
+  // margin-block-start: 10em;
+  min-height: 9vh;
+  background-color: var(--color-secundary);
+  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .footer__text {
+    font-size: 1rem;
+  }
+
+  & a {
+    font-style: italic;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline wavy;
+    text-decoration-color: var(--color-primary);
+    text-underline-offset: 2px;
+  }
+}
