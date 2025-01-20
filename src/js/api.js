@@ -1,4 +1,3 @@
-import APIKEY from './key.js';
 import axios from 'axios';
 
 // Config API
@@ -8,6 +7,6 @@ export const API = axios.create({
     'Content-Type': 'application/json'
   },
   params: {
-    api_key: APIKEY
+    api_key: import.meta.env.VITE_TMDB_KEY
   }
 });
