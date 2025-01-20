@@ -4,31 +4,46 @@ import {
   createMovieCard,
   createPersonCard,
   createGenres,
-  addCarouselMovement
+  addCarouselMovement,
+  renderLikedMovies
 } from '../js/dom.js';
+
+import { getItemFromLocalStorage } from '../js/utils.js';
 
 export default function() {
   // Render init functions
   renderBestTrendingMovie();
+
+  const likedMovies = getItemFromLocalStorage('cinema-liked');
+
   // render the trending movies
   renderListResults({
     htmlSelectorSection: '.section__tendencies .movies__cards',
-    callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
-    urlInfo: 'trendingMovies',
+    callbackRender: (item) => createMovieCard({ movie: item, lazy: true, isLiked: Boolean(likedMovies[item.id]) }),
+    urlInfo: {
+      name: 'trendingMovies',
+      propertyPath: 'results'
+    },
     numItems: 10
   });
   // render the now playing movies
   renderListResults({
     htmlSelectorSection: '.section__play-now .movies__cards',
-    callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
-    urlInfo: 'nowPlayingMovies',
+    callbackRender: (item) => createMovieCard({ movie: item, lazy: true, isLiked: Boolean(likedMovies[item.id]) }),
+    urlInfo: {
+      name: 'nowPlayingMovies',
+      propertyPath: 'results'
+    },
     numItems: 10
   });
   // render the upcoming movies
   renderListResults({
     htmlSelectorSection: '.section__upcoming .movies__cards',
-    callbackRender: (item) => createMovieCard({ movie: item, lazy: true }),
-    urlInfo: 'upcomingMovies',
+    callbackRender: (item) => createMovieCard({ movie: item, lazy: true, isLiked: Boolean(likedMovies[item.id]) }),
+    urlInfo: {
+      name: 'upcomingMovies',
+      propertyPath: 'results'
+    },
     numItems: 10
   });
 
@@ -36,7 +51,10 @@ export default function() {
   renderListResults({
     htmlSelectorSection: '.section__people .people__cards',
     callbackRender: (item) => createPersonCard({ person: item, lazy: false }),
-    urlInfo: 'trendingPeople',
+    urlInfo: {
+      name: 'trendingPeople',
+      propertyPath: 'results'
+    },
     numItems: 10
   });
 
@@ -44,11 +62,16 @@ export default function() {
   renderListResults({
     htmlSelectorSection: '.section__categories .categories__items',
     callbackRender: createGenres,
-    urlInfo: 'categoriesMovies',
+    urlInfo: {
+      name: 'categoriesMovies',
+      propertyPath: 'genres'
+    },
     numItems: 15
   });
 
-  // Events and interactions
+  // Render the movies liked
+  renderLikedMovies({ htmlSelectorSection: '.section__liked .movies__cards' });
+  // ----------------------------- Events and interactions ---------------------------------
 
   // Carousels
   addCarouselMovement();
