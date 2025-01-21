@@ -1,4 +1,12 @@
-import { getListResults, loadDefaultImage, scrollToLeft, scrollToRight } from './utils.js';
+import {
+  getListResults,
+  loadDefaultImage,
+  scrollToLeft,
+  scrollToRight,
+  getItemFromLocalStorage,
+  setItemFromLocalStorage,
+  getNestedProperty
+} from './utils.js';
 
 // Intersection observer
 const intersectionCallback = (entries) => {
@@ -16,7 +24,9 @@ const observerCardMovie = new IntersectionObserver(intersectionCallback);
 // Render the most tendencie movie
 export async function renderBestTrendingMovie() {
   const header = document.querySelector('.header');
-  const [bestTrendingMovie] = await getListResults('trendingMovies');
+  const data = await getListResults('trendingMovies');
+  const { results } = data;
+  const [bestTrendingMovie] = results;
   header.style.backgroundImage = `linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${bestTrendingMovie.backdrop_path}')`;
   const movieTitle = header.querySelector('.header h2');
   movieTitle.textContent = bestTrendingMovie.title;
@@ -26,9 +36,11 @@ export async function renderBestTrendingMovie() {
 }
 
 // Render the list results
-export async function renderListResults({ htmlSelectorSection, urlInfo, callbackRender, numItems }) {
+export async function renderListResults({ htmlSelectorSection, urlInfo, callbackRender, numItems, toClean = true }) {
+  const data = await getListResults(urlInfo);
+  console.log({ data });
+  const list = getNestedProperty({ obj: data, propertyPath: urlInfo.propertyPath }) ?? [];
   const section = document.querySelector(htmlSelectorSection);
-  const list = await getListResults(urlInfo);
   const fragment = document.createDocumentFragment();
 
   list.slice(0, numItems ?? list.lenght).forEach((item) => {
@@ -36,17 +48,32 @@ export async function renderListResults({ htmlSelectorSection, urlInfo, callback
     fragment.append(element);
   });
 
-  section.innerHTML = '';
+  if (toClean) {
+    section.innerHTML = '';
+  }
   section.appendChild(fragment);
+  return data;
+}
+
+// Render a message to announce the last load of the items
+export function renderNoMoreResults({ htmlSelectorSection }) {
+  const section = document.querySelector(htmlSelectorSection);
+
+  const divNoMore = document.createElement('div');
+  divNoMore.classList.add('no-more__movies');
+  divNoMore.innerHTML = `
+    <p>Is the end of the list, search for more movies or wait when we add more...</p>
+  `;
+  section.appendChild(divNoMore);
 }
 
 // Create a movie card with some of the movie information
-export function createMovieCard({ movie, lazy = false }) {
+export function createMovieCard({ movie, lazy = false, isLiked = false }) {
   const { poster_path: posterPath, title: movieName, release_date: date, vote_average: score, id } = movie;
   const posterUrl = `https://www.themoviedb.org/t/p/w300/${posterPath}`;
   const card = document.createElement('arcticle');
   card.classList.add('movie__card');
-  card.innerHTML = `
+  card.innerHTML = /* html */`
     <figure class="card__poster-wrapper">
       <img src="${lazy ? '' : posterUrl}" data-img="${lazy ? posterUrl : ''}" alt="Poster - ${movieName}" class="skeleton card__poster">
       <figcaption class="card__caption">
@@ -62,6 +89,22 @@ export function createMovieCard({ movie, lazy = false }) {
       </figcaption>
     </figure>
   `;
+
+  const buttonLike = document.createElement('button');
+  buttonLike.classList.add('card__btn-like');
+  const heart = isLiked ? '❤️' : '🤍';
+
+  buttonLike.innerHTML = `<span class="card__heart">${heart}</span>`;
+  card.appendChild(buttonLike);
+
+  // Add the like function
+  buttonLike.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const likeElement = buttonLike.querySelector('span');
+    likeElement.textContent = !isLiked ? '❤️' : '🤍';
+    handleLikedMovies(movie, isLiked);
+  });
+
   const movieImg = card.querySelector('img');
   if (lazy) {
     observerCardMovie.observe(movieImg);
@@ -81,6 +124,31 @@ export function createMovieCard({ movie, lazy = false }) {
   return card;
 }
 
+function handleLikedMovies(movie, isLiked) {
+  const likedMovies = getItemFromLocalStorage('cinema-liked');
+  if (isLiked) {
+    delete likedMovies[movie.id];
+  } else {
+    likedMovies[movie.id] = movie;
+  }
+  setItemFromLocalStorage('cinema-liked', likedMovies);
+  renderLikedMovies({ htmlSelectorSection: '.section__liked .movies__cards' });
+}
+
+export function renderLikedMovies({ htmlSelectorSection }) {
+  const moviesLiked = getItemFromLocalStorage('cinema-liked');
+  const moviesLikedArr = Object.values(moviesLiked);
+  const section = document.querySelector(htmlSelectorSection);
+  const fragment = document.createDocumentFragment();
+
+  moviesLikedArr.forEach((item) => {
+    const element = createMovieCard({ movie: item, lazy: true, isLiked: true });
+    fragment.append(element);
+  });
+  section.innerHTML = '';
+  section.appendChild(fragment);
+}
+
 // Create person card
 export function createPersonCard({ person, lazy = false }) {
   const { name, profile_path: profilePath } = person;
@@ -88,7 +156,7 @@ export function createPersonCard({ person, lazy = false }) {
   // card.dataset.movieId = id;
   const profileUrlImg = `https://www.themoviedb.org/t/p/w300/${profilePath}`;
   personCard.classList.add('person__card');
-  personCard.innerHTML = `
+  personCard.innerHTML = /* html */`
     <picture class="card__person-wrapper">
       <img src="${lazy ? '' : profileUrlImg}" data-img=${lazy ? profileUrlImg : ''} alt="Actor Photo - ${name}" class="card__person-img">
     </picture>
@@ -121,7 +189,7 @@ export function createGenres(genre) {
   const colorCategory = getComputedStyle(document.body).getPropertyValue(`--color-genre-${nameCssVariable}`);
   const categoryElement = document.createElement('div');
   categoryElement.classList.add('category__item', `category__item-${id}}`);
-  categoryElement.innerHTML = `
+  categoryElement.innerHTML = /* html */`
     <a href="#category=${id}-${name}" class="category__name">
       <span class="category__square" style="background-color:${colorCategory}"></span>
       <span>${name}</span>
@@ -166,7 +234,7 @@ function createMovieDetails(data, credits) {
   const article = document.createElement('article');
   article.classList.add('movie__article');
   const insertCategories = (categories) => categories
-    .map(({ id, name }) => `<li class="categorie"><a href="http://localhost:5173/#category=${id}-${name}">${name}</a></li>`).join('');
+    .map(({ id, name }) => `<li class="categorie"><a href="/#category=${id}-${name}">${name}</a></li>`).join('');
 
   const producer = credits.crew.find(member => member.job === 'Producer');
   const director = credits.crew.find(member => member.job === 'Director');
@@ -227,7 +295,7 @@ export function createCastCard(castPerson) {
   const characterCard = document.createElement('article');
   const { name, profile_path: profilePath, character } = castPerson;
   characterCard.classList.add('person__card');
-  characterCard.innerHTML = `
+  characterCard.innerHTML = /* html */`
     <picture class="card__cast-wrapper">
       <img src="https://www.themoviedb.org/t/p/w300/${profilePath}" alt="Actor Photo - ${name}" class="card__cast-img">
     </picture>
@@ -244,6 +312,42 @@ export function createCastCard(castPerson) {
     loadDefaultImage(e, 'imgPerson');
   });
   return characterCard;
+}
+
+export function createReview({ review }) {
+  const { author, content, updated_at: dateReview } = review;
+  const reviewEl = document.createElement('article');
+  reviewEl.classList.add('movie__review');
+  const date = new Date(dateReview);
+  const dateFormat = date.toDateString();
+
+  reviewEl.innerHTML = /* html */ `
+    <div>
+      <h3 class="review__title">A review by ${author}</h3>
+      <p>
+        <span class="review__date">${dateFormat}</span>
+      </p>
+    </div>
+    <p class="review__content">
+      ${content}
+    </p>
+  `;
+
+  return reviewEl;
+}
+
+export function createProvider({ provider }) {
+  const { logo_path: logoPathProvider, provider_name: nameProvider } = provider;
+  const providerEl = document.createElement('article');
+  providerEl.classList.add('movie__provider');
+  providerEl.innerHTML = /* html */ `
+    <figure class="provider__figure">
+      <img src="https://media.themoviedb.org/t/p/original/${logoPathProvider}" alt="Logo - ${nameProvider}"></img>
+      <figcaption>${nameProvider}</figcaption>
+    </figure>
+  `;
+
+  return providerEl;
 }
 
 export function renderGallery() {
