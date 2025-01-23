@@ -14,5 +14,14 @@
   }
 }
 
+.no-more__movies {
+  font-size: 1.2rem;
+  margin-block-start: 1.25em;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+}
+
 
 

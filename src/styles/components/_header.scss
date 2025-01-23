@@ -3,7 +3,7 @@
 .header {
   position: relative;
   min-height: 70vh;
-  padding-block-start: 1.25em;
+  padding-block-start: 2.5em;
   // background: var(--color-tertiry);
   // background-image: linear-gradient(to bottom, rgba(45, 41, 64, 0.45), rgba(13, 23, 53, 1)), url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg');
   background-repeat: no-repeat;
@@ -34,4 +34,21 @@
 
 .navbar {
   margin-block-end: 2em;
+}
+
+
+.header__language {
+  position: absolute;
+  top: 5px;
+  right: 0;
+
+  .language__select {
+    border: 0;
+    padding: .1em .5em;
+    background-color: rgba(255, 182, 8, 0.9);
+
+    & option {
+      background-color: white;
+    }
+  }
 }
