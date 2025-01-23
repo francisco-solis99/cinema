@@ -1,3 +1,4 @@
+import { getTranslation } from './lang.js';
 import {
   getListResults,
   loadDefaultImage,
@@ -5,7 +6,8 @@ import {
   scrollToRight,
   getItemFromLocalStorage,
   setItemFromLocalStorage,
-  getNestedProperty
+  getNestedProperty,
+  getColorCategoryCssVariableByName
 } from './utils.js';
 
 // Intersection observer
@@ -38,10 +40,9 @@ export async function renderBestTrendingMovie() {
 // Render the list results
 export async function renderListResults({ htmlSelectorSection, urlInfo, callbackRender, numItems, toClean = true }) {
   const data = await getListResults(urlInfo);
-  console.log({ data });
-  const list = getNestedProperty({ obj: data, propertyPath: urlInfo.propertyPath }) ?? [];
   const section = document.querySelector(htmlSelectorSection);
   const fragment = document.createDocumentFragment();
+  const list = getNestedProperty({ obj: data, propertyPath: urlInfo.propertyPath }) ?? [];
 
   list.slice(0, numItems ?? list.lenght).forEach((item) => {
     const element = callbackRender(item);
@@ -185,7 +186,7 @@ export function createPersonCard({ person, lazy = false }) {
 
 export function createGenres(genre) {
   const { name, id } = genre;
-  const nameCssVariable = name.toLowerCase().replace(' ', '-');
+  const nameCssVariable = getColorCategoryCssVariableByName(name);
   const colorCategory = getComputedStyle(document.body).getPropertyValue(`--color-genre-${nameCssVariable}`);
   const categoryElement = document.createElement('div');
   categoryElement.classList.add('category__item', `category__item-${id}}`);
@@ -365,5 +366,28 @@ export function addCarouselMovement() {
 
     leftBtn.addEventListener('click', () => scrollToLeft(innerCarousel, scrollPerItemValue));
     rightBtn.addEventListener('click', () => scrollToRight(innerCarousel, scrollPerItemValue));
+  });
+}
+
+export function renderTranslation({ htmlSelector, view, section }) {
+  const element = document.querySelector(htmlSelector);
+  element.textContent = getTranslation({ view, section });
+}
+
+export function setHandleLanguage() {
+  console.log('setHandleLanguage');
+  const { language } = getItemFromLocalStorage('cinema-lang');
+  const currentLanguage = language ?? 'en-US';
+  const selectLanguages = document.querySelector('.language__select');
+  console.log({ currentLanguage, options: selectLanguages.options });
+  for (const option of selectLanguages.options) {
+    if (option.value === currentLanguage) option.selected = true;
+  }
+
+  selectLanguages.addEventListener('change', (e) => {
+    console.log(selectLanguages.value);
+    console.log('listener');
+    setItemFromLocalStorage('cinema-lang', { language: selectLanguages.value });
+    location.reload();
   });
 }

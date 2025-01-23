@@ -1,4 +1,4 @@
-import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults } from '../js/dom.js';
+import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults, setHandleLanguage, renderTranslation } from '../js/dom.js';
 import { render, addIntersectionObserverToLoadMore } from '../js/utils.js';
 
 export default async function() {
@@ -28,6 +28,11 @@ export default async function() {
       });
     });
   });
+
+  // Language
+  setHandleLanguage();
+
+  renderTranslation({ htmlSelector: '.view__list-subtitle', view: '/', section: 'tendencies' });
 
   // Add the back button
   addBackButton('.button__back');

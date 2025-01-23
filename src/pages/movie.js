@@ -7,7 +7,9 @@ import {
   createProvider,
   createReview,
   // renderGallery,
-  addCarouselMovement
+  addCarouselMovement,
+  renderTranslation,
+  setHandleLanguage
 } from '../js/dom.js';
 
 import { render } from '../js/utils.js';
@@ -31,7 +33,22 @@ export default async function() {
         subpath: `/${idMovie}/credits`
       }
       ]
+    }).then(() => {
+      renderTranslation({ htmlSelector: '.movie__resume-title', view: '/movie', section: 'overview' });
     });
+
+    // Render the translations
+    const translations = [
+      ['.movie__providers .section__title', 'providers'],
+      ['.movie__cast .section__title', 'cast'],
+      ['.movie__reviews .section__title', 'reviews'],
+      ['.movie__similars .section__title', 'similar']
+    ];
+
+    translations.forEach(translation => renderTranslation({ htmlSelector: translation[0], view: '/movie', section: translation[1] }));
+
+    // Language
+    setHandleLanguage();
 
     // render providers
     renderListResults({
@@ -41,6 +58,13 @@ export default async function() {
         name: 'movie',
         subpath: `/${idMovie}/watch/providers`,
         propertyPath: ['results', 'US', 'buy']
+      }
+    }).then(data => {
+      const { results } = data;
+      const dataArr = results?.US?.buy ?? [];
+      if (Object.keys(dataArr).length === 0) {
+        const sectionToRemove = document.querySelector('.movie__providers');
+        sectionToRemove.remove();
       }
     });
 
@@ -54,6 +78,12 @@ export default async function() {
         propertyPath: 'cast'
       },
       numItems: 5
+    }).then(data => {
+      const { cast } = data;
+      if (Object.keys(cast).length === 0) {
+        const sectionToRemove = document.querySelector('.movie__cast');
+        sectionToRemove.remove();
+      }
     });
 
     // Render the gallery
@@ -75,6 +105,12 @@ export default async function() {
         propertyPath: ['results']
       },
       numItems: 3
+    }).then(data => {
+      const { results } = data;
+      if (Object.keys(results).length === 0) {
+        const sectionToRemove = document.querySelector('.movie__reviews');
+        sectionToRemove.remove();
+      }
     });
 
     // render the similar movies

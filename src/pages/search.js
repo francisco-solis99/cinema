@@ -1,4 +1,4 @@
-import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults } from '../js/dom.js';
+import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults, setHandleLanguage } from '../js/dom.js';
 import { render, addIntersectionObserverToLoadMore } from '../js/utils.js';
 
 export default async function() {
@@ -49,6 +49,9 @@ export default async function() {
     if (e.key !== 'Enter') return;
     searchMovie(searchInput.value);
   });
+
+  // Language
+  setHandleLanguage();
 
   // Add the back button
   addBackButton('.button__back');

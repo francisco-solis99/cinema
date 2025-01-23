@@ -5,18 +5,34 @@ import {
   createPersonCard,
   createGenres,
   addCarouselMovement,
-  renderLikedMovies
+  renderLikedMovies,
+  renderTranslation,
+  setHandleLanguage
 } from '../js/dom.js';
-
 import { getItemFromLocalStorage } from '../js/utils.js';
 
 export default function() {
+  // Language
+  setHandleLanguage();
+
+  // Render the translations
+  const translations = [
+    ['.section__play-now .section__title', 'playing'],
+    ['.section__upcoming .section__title', 'upcoming'],
+    ['.section__people .section__title', 'people'],
+    ['.section__categories .section__title', 'category'],
+    ['.section__liked .section__title', 'moviesLiked']
+  ];
+
+  translations.forEach(translation => renderTranslation({ htmlSelector: translation[0], view: '/', section: translation[1] }));
+
   // Render init functions
   renderBestTrendingMovie();
 
   const likedMovies = getItemFromLocalStorage('cinema-liked');
 
   // render the trending movies
+  renderTranslation({ htmlSelector: '.section__tendencies .section__title', view: '/', section: 'tendencies' });
   renderListResults({
     htmlSelectorSection: '.section__tendencies .movies__cards',
     callbackRender: (item) => createMovieCard({ movie: item, lazy: true, isLiked: Boolean(likedMovies[item.id]) }),
@@ -26,6 +42,7 @@ export default function() {
     },
     numItems: 10
   });
+
   // render the now playing movies
   renderListResults({
     htmlSelectorSection: '.section__play-now .movies__cards',
@@ -36,6 +53,7 @@ export default function() {
     },
     numItems: 10
   });
+
   // render the upcoming movies
   renderListResults({
     htmlSelectorSection: '.section__upcoming .movies__cards',
@@ -71,6 +89,7 @@ export default function() {
 
   // Render the movies liked
   renderLikedMovies({ htmlSelectorSection: '.section__liked .movies__cards' });
+
   // ----------------------------- Events and interactions ---------------------------------
 
   // Carousels

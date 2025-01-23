@@ -96,17 +96,29 @@
           <a href="">
             <h1 class="title">Cinema</h1>
           </a>
-          <div class="searcher">
-            <input type="text" class="searcher__input" placeholder="Search your movie..." aria-label="Search for movies">
-            <button class="button button-icon searcher__button" id="btn-search">
-              <span class="icon">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M23.9279 22.4559L16.1369 14.665C17.3459 13.102 17.9999 11.191 17.9999 9.18099C17.9999 6.775 17.0609 4.51901 15.3629 2.81802C13.6649 1.11703 11.403 0.18103 8.99996 0.18103C6.59697 0.18103 4.33498 1.12003 2.63699 2.81802C0.935996 4.51601 0 6.775 0 9.18099C0 11.584 0.938996 13.846 2.63699 15.544C4.33498 17.245 6.59397 18.181 8.99996 18.181C11.01 18.181 12.9179 17.527 14.4809 16.321L22.2719 24.1089C22.2947 24.1318 22.3219 24.1499 22.3517 24.1623C22.3816 24.1747 22.4136 24.181 22.4459 24.181C22.4782 24.181 22.5102 24.1747 22.5401 24.1623C22.5699 24.1499 22.5971 24.1318 22.6199 24.1089L23.9279 22.8039C23.9508 22.7811 23.9689 22.754 23.9813 22.7241C23.9936 22.6943 24 22.6622 24 22.6299C24 22.5976 23.9936 22.5656 23.9813 22.5358C23.9689 22.5059 23.9508 22.4788 23.9279 22.4559ZM13.7519 13.933C12.4799 15.202 10.794 15.901 8.99996 15.901C7.20597 15.901 5.51998 15.202 4.24798 13.933C2.97899 12.661 2.27999 10.975 2.27999 9.18099C2.27999 7.387 2.97899 5.69801 4.24798 4.42901C5.51998 3.16002 7.20597 2.46102 8.99996 2.46102C10.794 2.46102 12.4829 3.15702 13.7519 4.42901C15.0209 5.70101 15.7199 7.387 15.7199 9.18099C15.7199 10.975 15.0209 12.664 13.7519 13.933Z"
-                    fill="white" />
-                </svg>
-              </span>
-            </button>
+          <div class="header__right">
+            <div class="searcher">
+              <input type="text" class="searcher__input" placeholder="Search your movie..." aria-label="Search for movies">
+              <button class="button button-icon searcher__button" id="btn-search">
+                <span class="icon">
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M23.9279 22.4559L16.1369 14.665C17.3459 13.102 17.9999 11.191 17.9999 9.18099C17.9999 6.775 17.0609 4.51901 15.3629 2.81802C13.6649 1.11703 11.403 0.18103 8.99996 0.18103C6.59697 0.18103 4.33498 1.12003 2.63699 2.81802C0.935996 4.51601 0 6.775 0 9.18099C0 11.584 0.938996 13.846 2.63699 15.544C4.33498 17.245 6.59397 18.181 8.99996 18.181C11.01 18.181 12.9179 17.527 14.4809 16.321L22.2719 24.1089C22.2947 24.1318 22.3219 24.1499 22.3517 24.1623C22.3816 24.1747 22.4136 24.181 22.4459 24.181C22.4782 24.181 22.5102 24.1747 22.5401 24.1623C22.5699 24.1499 22.5971 24.1318 22.6199 24.1089L23.9279 22.8039C23.9508 22.7811 23.9689 22.754 23.9813 22.7241C23.9936 22.6943 24 22.6622 24 22.6299C24 22.5976 23.9936 22.5656 23.9813 22.5358C23.9689 22.5059 23.9508 22.4788 23.9279 22.4559ZM13.7519 13.933C12.4799 15.202 10.794 15.901 8.99996 15.901C7.20597 15.901 5.51998 15.202 4.24798 13.933C2.97899 12.661 2.27999 10.975 2.27999 9.18099C2.27999 7.387 2.97899 5.69801 4.24798 4.42901C5.51998 3.16002 7.20597 2.46102 8.99996 2.46102C10.794 2.46102 12.4829 3.15702 13.7519 4.42901C15.0209 5.70101 15.7199 7.387 15.7199 9.18099C15.7199 10.975 15.0209 12.664 13.7519 13.933Z"
+                      fill="white" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <div class="header__language">
+              <select name="" id="language" class="language__select">
+                <option value="en-US">
+                  🇺🇸
+                </option>
+                <option value="es-ES">
+                  🇪🇸
+                </option>
+              </select>
+            </div>
           </div>
         </nav>
         <h2 class="skeleton-title skeleton"></h2>
@@ -191,7 +203,7 @@
         <div class="container">
           <div class="section__info row">
             <h2 class="section__title">People</h2>
-            <button class="button button__primary" data-btnMore="people">View more</button>
+            <!-- <button class="button button__primary" data-btnMore="people">View more</button> -->
           </div>
           <div class="carousel">
             <button class="carousel__button carousel__button-left">
@@ -257,7 +269,7 @@
     </main>
 
     <footer class="footer">
-      <p class="footer__text">Made by <a href="https://github.com/francisco-solis99">Francisco</a> with love💛</p>
+      <p class="footer__text">Made by <a href="https://github.com/francisco-solis99">Francisco</a> with ❤️</p>
     </footer>
   </div>
 </body>
@@ -277,9 +289,21 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M4.22183 19.7782C-0.0739419 15.4824 -0.0739419 8.51759 4.22183 4.22183C8.51759 -0.0739419 15.4824 -0.0739419 19.7782 4.22183C24.0739 8.51759 24.0739 15.4824 19.7782 19.7782C15.4824 24.0739 8.51759 24.0739 4.22183 19.7782ZM5.63604 18.364C2.12132 14.8492 2.12132 9.15076 5.63604 5.63604C9.15076 2.12132 14.8492 2.12132 18.364 5.63604C21.8787 9.15076 21.8787 14.8492 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364Z" fill="#fff" /></svg>
           </span>
         </button>
-        <a href="">
-          <h1 class="title">Cinema</h1>
-        </a>
+        <div>
+          <a href="">
+            <h1 class="title">Cinema</h1>
+          </a>
+          <div class="header__language">
+            <select name="" id="language" class="language__select">
+              <option value="en-US">
+                🇺🇸
+              </option>
+              <option value="es-ES">
+                🇪🇸
+              </option>
+            </select>
+          </div>
+        </div>
       </nav>
       <h2 class="view__list-subtitle">Trending movies</h2>
     </div>
@@ -350,9 +374,21 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M4.22183 19.7782C-0.0739419 15.4824 -0.0739419 8.51759 4.22183 4.22183C8.51759 -0.0739419 15.4824 -0.0739419 19.7782 4.22183C24.0739 8.51759 24.0739 15.4824 19.7782 19.7782C15.4824 24.0739 8.51759 24.0739 4.22183 19.7782ZM5.63604 18.364C2.12132 14.8492 2.12132 9.15076 5.63604 5.63604C9.15076 2.12132 14.8492 2.12132 18.364 5.63604C21.8787 9.15076 21.8787 14.8492 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364Z" fill="#fff" /></svg>
           </span>
         </button>
-        <a href="">
-          <h1 class="title">Cinema</h1>
-        </a>
+        <div>
+          <a href="">
+            <h1 class="title">Cinema</h1>
+          </a>
+          <div class="header__language">
+            <select name="" id="language" class="language__select">
+              <option value="en-US">
+                🇺🇸
+              </option>
+              <option value="es-ES">
+                🇪🇸
+              </option>
+            </select>
+          </div>
+        </div>
       </nav>
       <!-- <h2 class="view__list-subtitle">Search movies</h2> -->
     </div>
@@ -404,9 +440,21 @@
               <path fill-rule="evenodd" clip-rule="evenodd" d="M4.22183 19.7782C-0.0739419 15.4824 -0.0739419 8.51759 4.22183 4.22183C8.51759 -0.0739419 15.4824 -0.0739419 19.7782 4.22183C24.0739 8.51759 24.0739 15.4824 19.7782 19.7782C15.4824 24.0739 8.51759 24.0739 4.22183 19.7782ZM5.63604 18.364C2.12132 14.8492 2.12132 9.15076 5.63604 5.63604C9.15076 2.12132 14.8492 2.12132 18.364 5.63604C21.8787 9.15076 21.8787 14.8492 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364Z" fill="#fff" /></svg>
           </span>
         </button>
-        <a href="">
-          <h1 class="title">Cinema</h1>
-        </a>
+        <div>
+          <a href="">
+            <h1 class="title">Cinema</h1>
+          </a>
+          <div class="header__language">
+            <select name="" id="language" class="language__select">
+              <option value="en-US">
+                🇺🇸
+              </option>
+              <option value="es-ES">
+                🇪🇸
+              </option>
+            </select>
+          </div>
+        </div>
       </nav>
       <div class="movie__poster">
         <figure>
@@ -437,16 +485,16 @@
           <span class="skeleton skeleton-category"></span>
         </div>
       </section>
-      <hr>
+      <hr class="movie__hr"/>
       <section class="movie__providers">
-        <h2>Watch Providers</h2>
+        <h2 class="section__title">Watch Providers</h2>
         <div class="providers__list">
           <div class="skeleton skeleton-card"></div>
           <div class="skeleton skeleton-card"></div>
         </div>
       </section>
       <section class="movie__cast">
-        <h2>Top Billed Cast</h2>
+        <h2 class="section__title">Top Billed Cast</h2>
         <div class="cast__persons">
           <div class="skeleton skeleton-card"></div>
           <div class="skeleton skeleton-card"></div>
@@ -456,14 +504,14 @@
         </div>
       </section>
       <section class="movie__reviews">
-        <h2>Reviews</h2>
+        <h2 class="section__title">Reviews</h2>
         <div class="reviews__list">
           <div class="skeleton skeleton-card"></div>
           <div class="skeleton skeleton-card"></div>
         </div>
       </section>
       <section class="movie__similars">
-        <h2>Similar movies</h2>
+        <h2 class="section__title">Similar movies</h2>
         <div class="carousel">
           <button class="carousel__button carousel__button-left">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="white" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225z"/></svg>

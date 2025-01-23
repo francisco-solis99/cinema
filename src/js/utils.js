@@ -1,4 +1,5 @@
 import { API } from './api.js';
+import { genresTranslations } from './lang.js';
 
 export const insertHTML = (el, html) => el.insertAdjacentHTML('afterbegin', html);
 
@@ -158,9 +159,17 @@ export function setItemFromLocalStorage(keyItem, valueToSet) {
 }
 
 export function getNestedProperty({ obj, propertyPath = [] }) {
+  if (obj === undefined) return [];
   if (typeof propertyPath === 'string') return obj[propertyPath];
   if (propertyPath.length === 1) return obj[propertyPath[0]];
 
   const property = propertyPath.shift();
   return getNestedProperty({ obj: obj[property], propertyPath });
+}
+
+export function getColorCategoryCssVariableByName(name) {
+  for (const [key, valueArr] of Object.entries(genresTranslations)) {
+    if (valueArr.includes(name)) return key;
+  }
+  return null;
 }

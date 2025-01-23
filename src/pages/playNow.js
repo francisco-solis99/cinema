@@ -1,4 +1,4 @@
-import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults } from '../js/dom.js';
+import { createMovieCard, renderListResults, addBackButton, renderNoMoreResults, setHandleLanguage, renderTranslation } from '../js/dom.js';
 import { render, addIntersectionObserverToLoadMore } from '../js/utils.js';
 
 export default async function() {
@@ -27,8 +27,9 @@ export default async function() {
     });
   });
 
-  const titlePage = document.querySelector('.view__list-subtitle');
-  titlePage.textContent = 'Play now movies';
+  // Language
+  setHandleLanguage();
+  renderTranslation({ htmlSelector: '.view__list-subtitle', view: '/', section: 'playing' });
 
   // add the back button
   addBackButton('.button__back');
